@@ -1,8 +1,7 @@
 package entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 }
 )
 @XmlRootElement
-public class Jugador {
+public class Jugador implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//idJugador es autogenerado por el sgbd
 	@Id @GeneratedValue 
 	private int idJugador;
@@ -58,10 +58,10 @@ public class Jugador {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "{\"idJugador\":\"" + idJugador + "\", \"email\":\"" + email + "\", \"usuario\":\"" + usuario
 				+ "\", \"fechaCreacion\":\"" + fechaCreacion + "\"}";
-	}
+	}*/
 
 }

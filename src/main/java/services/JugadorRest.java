@@ -16,16 +16,21 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import daoimp.JugadorDaoImp;
+import daoimp.MazoDaoImp;
 import entities.Jugador;
+import entities.Mazo;
 
 @ApplicationScoped
 @Path("/jugadores")
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
+	@Inject
+	private MazoDaoImp mazoDAO;
 
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -44,6 +49,21 @@ public class JugadorRest {
 		else
 			responseStatus = Response.Status.NOT_FOUND;
 		return Response.status(responseStatus).build();
+	}
+	
+	@GET
+	@Path("/{id}/mazos")
+	@Produces(APPLICATION_JSON)
+	public Response getMazosOf(@PathParam("id") int idJugador) {
+		Jugador jugador = jugadorDAO.getJugadorById(idJugador);
+		List<Mazo> mazos = null;
+		if (jugador != null) {
+			//si existe el jugador retornamos sus mazos.
+			 mazos = mazoDAO.getMazosFrom(jugador.getIdJugador());
+		}			
+		else
+			return Response.status(Status.NOT_FOUND).build();
+		return Response.ok(mazos).build();
 	}
 
 	@PUT
