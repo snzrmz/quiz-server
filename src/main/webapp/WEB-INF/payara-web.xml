@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://docs.payara.fish/enterprise/docs/documentation/payara-server/app-deployment/deployment-descriptors.html -->
+<!--"Given this deployment model, the context prefix is irrelevant. Mapping the application to the root context / is more convenient."https://rieckpil.de/deploy-a-jakarta-ee-application-to-the-root-context/-->
+<!DOCTYPE payara-web-app PUBLIC "-//Payara.fish//DTD Payara Server 4 Servlet 3.0//EN" "https://raw.githubusercontent.com/payara/Payara-Server-Documentation/master/schemas/payara-web-app_4.dtd">
+<payara-web-app>
+ <context-root>/api</context-root>
+</payara-web-app>
