@@ -2,8 +2,10 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -19,16 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     		+ "FROM Mazo m "
     		+ "WHERE jugador.idJugador = :idJugador")
 })
-@XmlRootElement
 public class Mazo implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String nombre;
 	@ManyToOne
 	//omitimos la columna referenciada al llamarse igual
-    @JoinColumn(name="idJugador")
-	@Id
+    @JoinColumn(name="idJugador",
+    referencedColumnName = "idJugador")
+	@EmbeddedId
 	private Jugador jugador;
 	
 	public String getNombre() {

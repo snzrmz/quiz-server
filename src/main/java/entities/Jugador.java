@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Jugador.getAll", query = "select j from Jugador j")
 }
 )
-@XmlRootElement
+
 public class Jugador implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//idJugador es autogenerado por el sgbd
