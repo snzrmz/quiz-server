@@ -2,9 +2,9 @@ package dao;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 import entities.Jugador;
-@Remote
+@Local
 public interface JugadorDao {
 	List<Jugador> getJugadores();
 	Jugador getJugadorById(int idJugador);

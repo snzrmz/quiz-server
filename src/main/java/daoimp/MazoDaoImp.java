@@ -16,17 +16,15 @@ public class MazoDaoImp implements MazoDao {
 	private EntityManager entityManager;
 
 	@Override
-	public List<Mazo> getMazos() {
-		return entityManager.createNamedQuery("Mazo.getAll", Mazo.class).getResultList();
+	public Mazo getMazo(int idJugador, String nombreMazo) {
+		return entityManager.createNamedQuery("Mazo.getById", Mazo.class)
+				.setParameter("idJugador", idJugador)
+				.setParameter("nombreMazo",nombreMazo).getSingleResult();
 	}
 
 	@Override
 	public List<Mazo> getMazosFrom(int idJugador) {
-		return entityManager.createNamedQuery("Mazo.getFrom", Mazo.class).setParameter("idJugador", idJugador).getResultList();
+		return entityManager.createNamedQuery("Mazo.getAllFrom", Mazo.class).setParameter("idJugador", idJugador).getResultList();
 	}
-
-	
-	
-
 
 }

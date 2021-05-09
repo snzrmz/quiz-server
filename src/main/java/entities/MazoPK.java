@@ -1,14 +1,16 @@
 package entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class MazoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private int idJugador;
-	private String nombre;
+
+	protected int idJugador;
+	protected String nombre;
+
 	public MazoPK() {
 	}
 
@@ -44,7 +46,5 @@ public class MazoPK implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-    
+
 }

@@ -1,6 +1,7 @@
 package services;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 
 import java.util.List;
 
@@ -29,8 +30,7 @@ import entities.Mazo;
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
-	@Inject
-	private MazoDaoImp mazoDAO;
+	
 
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -51,21 +51,6 @@ public class JugadorRest {
 		return Response.status(responseStatus).build();
 	}
 	
-	@GET
-	@Path("/{id}/mazos")
-	@Produces(APPLICATION_JSON)
-	public Response getMazosOf(@PathParam("id") int idJugador) {
-		Jugador jugador = jugadorDAO.getJugadorById(idJugador);
-		List<Mazo> mazos = null;
-		if (jugador != null) {
-			//si existe el jugador retornamos sus mazos.
-			 mazos = mazoDAO.getMazosFrom(jugador.getIdJugador());
-		}			
-		else
-			return Response.status(Status.NOT_FOUND).build();
-		return Response.ok(mazos).build();
-	}
-
 	@PUT
 	@Path("/{id}")
 	@Consumes(APPLICATION_JSON)

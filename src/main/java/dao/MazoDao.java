@@ -2,11 +2,11 @@ package dao;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 import entities.Mazo;
-@Remote
+@Local
 public interface MazoDao {
 	
-  List<Mazo> getMazos();//borrar
+  Mazo getMazo(int idJugador, String nombreMazo);
   List<Mazo> getMazosFrom(int idJugador);
 }

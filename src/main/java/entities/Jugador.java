@@ -10,13 +10,14 @@ import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
+
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Jugador.findOne", query = "select j from Jugador j where j.idJugador = :idJugador"),
     @NamedQuery(name = "Jugador.getAll", query = "select j from Jugador j")
 }
 )
-
+@XmlRootElement
 public class Jugador implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//idJugador es autogenerado por el sgbd
