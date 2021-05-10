@@ -1,7 +1,6 @@
 package services;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 
 import java.util.List;
 
@@ -17,13 +16,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import daoimp.JugadorDaoImp;
-import daoimp.MazoDaoImp;
 import entities.Jugador;
-import entities.Mazo;
 
 @ApplicationScoped
 @Path("/jugadores")
