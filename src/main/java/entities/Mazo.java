@@ -37,15 +37,7 @@ public class Mazo implements Serializable {
 	public Mazo() {
 
 	}
-	/*
-	 * @Override public String toString() { return "{\"nombre\":\"" + nombre +
-	 * "\", \"jugador\":\"" + jugador.getIdJugador() + "\"}"; }
-	 */
-
-	/*
-	 * public MazoPK getMazoPK() { return mazoPK; }
-	 */
-
+	
 	public void setMazoPK(MazoPK mazoPK) {
 		this.mazoPK = mazoPK;
 	}
@@ -57,5 +49,14 @@ public class Mazo implements Serializable {
 	public int getIdJugador() {
 		return mazoPK.idJugador;
 	}
+	
+	/*
+	 * @Override public String toString() { return "{\"nombre\":\"" + nombre +
+	 * "\", \"jugador\":\"" + jugador.getIdJugador() + "\"}"; }
+	 */
+
+	/*
+	 * public MazoPK getMazoPK() { return mazoPK; }
+	 */
 
 }

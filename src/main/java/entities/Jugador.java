@@ -25,6 +25,7 @@ public class Jugador implements Serializable {
 	private int idJugador;
 	private String email;
 	private String usuario;
+	private String contrasena;
 	private LocalDate fechaCreacion;
 
 	public int getIdJugador() {
@@ -59,10 +60,20 @@ public class Jugador implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	/*@Override
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+	@Override
 	public String toString() {
 		return "{\"idJugador\":\"" + idJugador + "\", \"email\":\"" + email + "\", \"usuario\":\"" + usuario
-				+ "\", \"fechaCreacion\":\"" + fechaCreacion + "\"}";
-	}*/
+				+ "\", \"contrasena\":\"" + contrasena + "\", \"fechaCreacion\":\"" + fechaCreacion + "\"}";
+	}
+
+	
 
 }
