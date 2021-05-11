@@ -6,7 +6,7 @@ import javax.ejb.Local;
 import entities.Tarjeta;
 @Local
 public interface TarjetaDao {
-	List<Tarjeta>getTarjetasFrom(int idJugador);
-	List<Tarjeta>getTarjetasOfMazo(String nombreMazo, int idJugador);
+	List<Tarjeta>getAllFrom(int idJugador);
+	List<Tarjeta>getAllOfMazo(String nombreMazo, int idJugador);
 
 }

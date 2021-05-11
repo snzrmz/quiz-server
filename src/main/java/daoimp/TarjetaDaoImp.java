@@ -13,13 +13,13 @@ public class TarjetaDaoImp implements TarjetaDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	@Override
-	public List<Tarjeta> getTarjetasFrom(int idJugador) {
+	public List<Tarjeta> getAllFrom(int idJugador) {
 		return entityManager.createNamedQuery("Tarjeta.getFrom", Tarjeta.class)
 				.setParameter("idJugador", idJugador).getResultList();
 
 	}
 	@Override
-	public List<Tarjeta> getTarjetasOfMazo(String nombreMazo, int idJugador) {
+	public List<Tarjeta> getAllOfMazo(String nombreMazo, int idJugador) {
 		return entityManager.createNamedQuery("Tarjeta.getOfMazo", Tarjeta.class)
 				.setParameter("idJugador", idJugador)
 				.setParameter("nombreMazo", nombreMazo).getResultList();

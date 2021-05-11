@@ -6,8 +6,8 @@ import javax.ejb.Local;
 import entities.Jugador;
 @Local
 public interface JugadorDao {
-	List<Jugador> getJugadores();
-	Jugador getJugadorById(int idJugador);
-	/*void crearJugador(Jugador jugador);
-	void eliminarJugador(Jugador jugador);*/
+	List<Jugador> getAll();
+	Jugador getOne(int idJugador);
+	int create(Jugador jugador);
+	void delete(Jugador jugador);
 }

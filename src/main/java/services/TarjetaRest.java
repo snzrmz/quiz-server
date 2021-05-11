@@ -26,7 +26,7 @@ public class TarjetaRest {
 	@Produces(APPLICATION_JSON)
 	public Response getAllFrom(@PathParam("id") int idJugador) {
 	
-		List<Tarjeta> tarjetas = tarjetaDAO.getTarjetasFrom(idJugador);
+		List<Tarjeta> tarjetas = tarjetaDAO.getAllFrom(idJugador);
 		return Response.ok(tarjetas).build();
 	}
 	
@@ -34,7 +34,7 @@ public class TarjetaRest {
 	@GET
 	@Produces(APPLICATION_JSON)
 	public Response getAllOfMazo(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo) {
-		List<Tarjeta> tarjetas = tarjetaDAO.getTarjetasOfMazo(nombreMazo, idJugador);
+		List<Tarjeta> tarjetas = tarjetaDAO.getAllOfMazo(nombreMazo, idJugador);
 		return Response.ok(tarjetas).build();
 	}
 

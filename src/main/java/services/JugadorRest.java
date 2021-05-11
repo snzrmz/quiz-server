@@ -2,6 +2,7 @@ package services;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,6 +17,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 import daoimp.JugadorDaoImp;
@@ -26,12 +28,11 @@ import entities.Jugador;
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
-	
 
 	@GET
 	@Produces(APPLICATION_JSON)
 	public List<Jugador> all() {
-		return jugadorDAO.getJugadores();
+		return jugadorDAO.getAll();
 	}
 
 	@GET
@@ -39,19 +40,19 @@ public class JugadorRest {
 	@Produces(APPLICATION_JSON)
 	public Response getById(@PathParam("id") int idJugador) {
 		Response.Status responseStatus = Response.Status.OK;
-		Jugador jugador = jugadorDAO.getJugadorById(idJugador);
+		Jugador jugador = jugadorDAO.getOne(idJugador);
 		if (jugador != null)
 			return Response.ok(jugador).build();
 		else
 			responseStatus = Response.Status.NOT_FOUND;
 		return Response.status(responseStatus).build();
 	}
-	
+
 	@PUT
 	@Path("/{id}")
 	@Consumes(APPLICATION_JSON)
 	public Response putUsuario(@PathParam("id") int idJugador, Jugador jugador) {
-		//TODO
+		// TODO
 		Response.Status responseStatus = Response.Status.NOT_IMPLEMENTED;
 		return Response.status(responseStatus).build();
 	}
@@ -59,16 +60,19 @@ public class JugadorRest {
 	@POST
 	@Consumes(APPLICATION_JSON)
 	public Response postUsuario(@Context UriInfo uriInfo, Jugador jugador) {
-		//TODO
-		Response.Status responseStatus = Response.Status.NOT_IMPLEMENTED;
-		return Response.status(responseStatus).build();
+
+		int idJugador = jugadorDAO.create(jugador);
+
+		UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
+		URI uri = uriBuilder.path(Integer.toString(idJugador)).build();
+		return Response.created(uri).build();
 
 	}
 
 	@DELETE
 	@Path("/{id}")
 	public Response deleteUsuario(@PathParam("id") int idJugador) {
-		//TODO
+		// TODO
 		Response.Status responseStatus = Response.Status.OK;
 		return Response.status(responseStatus).build();
 	}

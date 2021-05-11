@@ -25,19 +25,26 @@ public class MazoRest {
 	private MazoDaoImp mazoDAO;
 	@Inject
 	private JugadorDaoImp jugadorDAO;
-	
+
 	@GET
 	@Produces(APPLICATION_JSON)
 	public Response getMazosOf(@PathParam("id") int idJugador) {
-		Jugador jugador = jugadorDAO.getJugadorById(idJugador);
+		Jugador jugador = jugadorDAO.getOne(idJugador);
+		Response.Status response = Response.Status.OK;
 		List<Mazo> mazos = null;
 		if (jugador != null) {
-			//si existe el jugador retornamos sus mazos.
-			 mazos = mazoDAO.getMazosFrom(jugador.getIdJugador());
-		}			
-		else
-			return Response.status(Status.NOT_FOUND).build();
-		return Response.ok(mazos).build();
+			// si existe el jugador retornamos sus mazos.
+			mazos = mazoDAO.getAll(idJugador);
+		} else {
+			response = Status.NOT_FOUND;
+		}
+
+		if (response == Status.OK) {
+			return Response.ok(mazos).build();
+		} else {
+			return Response.status(response).build();
+		}
+
 	}
 
 }
