@@ -50,7 +50,9 @@ public class JugadorDaoImp implements JugadorDao {
 		et.begin();
 		em.merge(jugador);
 		et.commit();
+		
 	}
+
 
 
 }
