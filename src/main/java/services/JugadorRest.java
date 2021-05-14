@@ -24,19 +24,12 @@ import daoimp.JugadorDaoImp;
 import entities.Jugador;
 
 @ApplicationScoped
-@Path("/jugadores")
+@Path("/jugadores/{id}")
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
 
 	@GET
-	@Produces(APPLICATION_JSON)
-	public List<Jugador> all() {
-		return jugadorDAO.getAll();
-	}
-
-	@GET
-	@Path("/{id}")
 	@Produces(APPLICATION_JSON)
 	public Response getById(@PathParam("id") int idJugador) {
 		Response.Status responseStatus = Response.Status.OK;
@@ -49,11 +42,10 @@ public class JugadorRest {
 	}
 
 	@PUT
-	@Path("/{id}")
 	@Consumes(APPLICATION_JSON)
 	public Response putUsuario(@PathParam("id") int idJugador, Jugador jugador) {
-		// TODO
-		Response.Status responseStatus = Response.Status.NOT_IMPLEMENTED;
+		Response.Status responseStatus = Response.Status.OK;
+		jugadorDao.update(jugador);
 		return Response.status(responseStatus).build();
 	}
 
@@ -63,18 +55,16 @@ public class JugadorRest {
 
 		int idJugador = jugadorDAO.create(jugador);
 
-		UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
-		URI uri = uriBuilder.path(Integer.toString(idJugador)).build();
-		return Response.created(uri).build();
-
-	}
-
-	@DELETE
-	@Path("/{id}")
-	public Response deleteUsuario(@PathParam("id") int idJugador) {
-		// TODO
-		Response.Status responseStatus = Response.Status.OK;
-		return Response.status(responseStatus).build();
+		if (idJugador!=-1) {
+			UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
+			URI uri = uriBuilder.path(Integer.toString(idJugador)).build();
+			return Response.created(uri).build();
+		}
+		else {
+			Response.status responseStatus = Response.status.NOT_FOUND;
+			return Response.status(responseStatus).build();
+		}
+		
 	}
 
 }
