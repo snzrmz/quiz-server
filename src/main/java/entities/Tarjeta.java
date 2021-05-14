@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "Tarjeta.getFrom", query = "SELECT t FROM Tarjeta t " + "WHERE t.idJugador = :idJugador"),
+		@NamedQuery(name = "Tarjeta.getOne", query = "SELECT t FROM Tarjeta t " + "WHERE t.idTarjeta = :idTarjeta"),
 		@NamedQuery(name = "Tarjeta.getOfMazo", query = "SELECT t FROM Tarjeta t "
 				+ "WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo") })
 public class Tarjeta implements Serializable {
