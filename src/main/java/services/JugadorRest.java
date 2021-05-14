@@ -3,12 +3,9 @@ package services;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 import java.net.URI;
-import java.util.List;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -45,7 +42,7 @@ public class JugadorRest {
 	@Consumes(APPLICATION_JSON)
 	public Response putUsuario(@PathParam("id") int idJugador, Jugador jugador) {
 		Response.Status responseStatus = Response.Status.OK;
-		jugadorDao.update(jugador);
+		jugadorDAO.update(jugador);
 		return Response.status(responseStatus).build();
 	}
 
@@ -61,7 +58,7 @@ public class JugadorRest {
 			return Response.created(uri).build();
 		}
 		else {
-			Response.status responseStatus = Response.status.NOT_FOUND;
+			Response.Status responseStatus = Response.Status.NOT_FOUND;
 			return Response.status(responseStatus).build();
 		}
 		
