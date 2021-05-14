@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import javax.transaction.UserTransaction;
 
 import dao.JugadorDao;
@@ -18,7 +17,7 @@ import entities.Jugador;
 public class JugadorDaoImp implements JugadorDao {
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager em;
 	@Inject
 	UserTransaction ut;
 
@@ -26,7 +25,7 @@ public class JugadorDaoImp implements JugadorDao {
 	public Jugador getOne(int idJugador) {
 		Jugador jugador;
 		try {
-			jugador = entityManager.createNamedQuery("Jugador.findOne", Jugador.class)
+			jugador = em.createNamedQuery("Jugador.findOne", Jugador.class)
 					.setParameter("idJugador", idJugador).getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
@@ -36,24 +35,22 @@ public class JugadorDaoImp implements JugadorDao {
 	}
 
 	@Override
-	public List<Jugador> getAll() {
-		return entityManager.createNamedQuery("Jugador.getAll", Jugador.class).getResultList();
-	}
-
-	@Override
 	public int create(Jugador jugador) {
-		EntityTransaction et = entityManager.getTransaction();
+		EntityTransaction et = em.getTransaction();
 		et.begin();
-		entityManager.persist(jugador);
+		em.persist(jugador);
 		et.commit();
 		return jugador.getIdJugador();
 
 	}
 
 	@Override
-	public void delete(Jugador jugador) {
-		// TODO Auto-generated method stub
-
+	public void update(Jugador jugador) {
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.merge(jugador);
+		et.commit();
 	}
+
 
 }
