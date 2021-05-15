@@ -3,9 +3,11 @@ package daoimp;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import dao.TarjetaDao;
 import entities.Tarjeta;
@@ -51,6 +53,41 @@ public class TarjetaDaoImp implements TarjetaDao {
 		et.begin();
 		em.remove(tarjeta);
 		et.commit();	
+	}
+	@Override
+	public List<Tarjeta> getTarjetasAcertadas(int idRepaso, int idJugador, String nombreMazo) {
+		
+		String sql = "SELECT * FROM Tarjeta t "
+				+ "WHERE idTarjeta IN "
+				+ "(SELECT Tarjeta_idTarjeta FROM Tarjeta_Repaso_Acertado tra INNER JOIN Repaso r ON tra.Repaso_idRepaso = r.idRepaso WHERE Repaso_idRepaso = :idRepaso) "
+				+ "AND idJugador = :idJugador AND nombreMazo = :nombreMazo";
+				
+		Query query = em.createNativeQuery(sql, Tarjeta.class);
+		query.setParameter(1, idRepaso);
+		query.setParameter(2, idJugador);
+		query.setParameter(3, nombreMazo);
+		
+		@SuppressWarnings("unchecked")
+		List<Tarjeta> resultList = (List<Tarjeta>) query.getResultList();
+		
+		return resultList;
+	}
+	@Override
+	public List<Tarjeta> getTarjetasFalladas(int idRepaso, int idJugador, String nombreMazo) {
+		String sql = "SELECT * FROM Tarjeta t "
+				+ "WHERE idTarjeta IN "
+				+ "(SELECT Tarjeta_idTarjeta FROM Tarjeta_Repaso_Fallado trf INNER JOIN Repaso r ON trf.Repaso_idRepaso = r.idRepaso WHERE Repaso_idRepaso = :idRepaso) "
+				+ "AND idJugador = :idJugador AND nombreMazo = :nombreMazo";
+				
+		Query query = em.createNativeQuery(sql, Tarjeta.class);
+		query.setParameter(1, idRepaso);
+		query.setParameter(2, idJugador);
+		query.setParameter(3, nombreMazo);
+		
+		@SuppressWarnings("unchecked")
+		List<Tarjeta> resultList = (List<Tarjeta>) query.getResultList();
+		
+		return resultList;
 	}
 
 }

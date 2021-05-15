@@ -21,14 +21,6 @@ public class TarjetaRest {
 	@Inject
 	private TarjetaDaoImp tarjetaDAO;
 
-	@Path("tarjetas")
-	@GET
-	@Produces(APPLICATION_JSON)
-	public Response getAllFrom(@PathParam("id") int idJugador) {
-	
-		List<Tarjeta> tarjetas = tarjetaDAO.getAllFrom(idJugador);
-		return Response.ok(tarjetas).build();
-	}
 	
 	@Path("/{nombreMazo}/tarjetas")
 	@GET
