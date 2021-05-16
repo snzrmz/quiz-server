@@ -33,6 +33,19 @@ public class JugadorDaoImp implements JugadorDao {
 
 		return jugador;
 	}
+	
+	@Override
+	public Jugador getOneByEmail(String email) {
+		Jugador jugador;
+		try {
+			jugador = em.createNamedQuery("Jugador.findOneByEmail", Jugador.class)
+					.setParameter("email", email).getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+
+		return jugador;
+	}
 
 	@Override
 	public int create(Jugador jugador) {
@@ -52,5 +65,7 @@ public class JugadorDaoImp implements JugadorDao {
 		et.commit();
 		
 	}
+
+
 
 }

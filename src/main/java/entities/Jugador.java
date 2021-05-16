@@ -17,7 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Jugador.findOne", query = "SELECT j FROM Jugador j WHERE j.idJugador = :idJugador")
+    @NamedQuery(name = "Jugador.findOne", query = "SELECT j FROM Jugador j WHERE j.idJugador = :idJugador"),
+    @NamedQuery(name = "Jugador.findOneByEmail", query = "SELECT j FROM Jugador j WHERE j.email = :email")
 }
 )
 @XmlRootElement

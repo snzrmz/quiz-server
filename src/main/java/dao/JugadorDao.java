@@ -6,6 +6,7 @@ import entities.Jugador;
 public interface JugadorDao {
 
 	Jugador getOne(int idJugador);
+	Jugador getOneByEmail(String email);
 	int create(Jugador jugador);
 	void update(Jugador jugador);
 }
