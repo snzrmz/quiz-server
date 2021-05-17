@@ -16,18 +16,23 @@ import daoimp.TarjetaDaoImp;
 import entities.Tarjeta;
 
 @ApplicationScoped
-@Path("jugadores/{id}/mazos/")
+@Path("jugadores/{id}/mazos/{nombreMazo}/tarjetas")
 public class TarjetaRest {
 	@Inject
 	private TarjetaDaoImp tarjetaDAO;
 
-	
-	@Path("/{nombreMazo}/tarjetas")
 	@GET
 	@Produces(APPLICATION_JSON)
 	public Response getAllOfMazo(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo) {
 		List<Tarjeta> tarjetas = tarjetaDAO.getAllOfMazo(nombreMazo, idJugador);
 		return Response.ok(tarjetas).build();
 	}
-
+	
+	@Path("/{idTarjeta}")
+	@GET
+	@Produces
+	public Response getTarjetas(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo, @PathParam("idTarjeta") int idTarjeta) {
+		Tarjeta tarjeta = tarjetaDAO.getOne(idTarjeta);
+		return Response.ok(tarjeta).build();
+	}
 }

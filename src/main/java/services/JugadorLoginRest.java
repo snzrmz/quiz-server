@@ -14,7 +14,7 @@ import daoimp.JugadorDaoImp;
 import entities.Jugador;
 
 @ApplicationScoped
-@Path("/jugadores/login/{email}")
+@Path("/login/{email}")
 public class JugadorLoginRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
