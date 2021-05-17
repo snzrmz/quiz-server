@@ -21,6 +21,7 @@ import daoimp.JugadorDaoImp;
 import daoimp.MazoDaoImp;
 import entities.Jugador;
 import entities.Mazo;
+import daoimp.TarjetaDaoImp;
 
 @ApplicationScoped
 @Path("jugadores/{id}/mazos")
@@ -29,6 +30,8 @@ public class MazoRest {
 	private MazoDaoImp mazoDAO;
 	@Inject
 	private JugadorDaoImp jugadorDAO;
+	@Inject
+	private TarjetaDaoImp tarjetaDAO;
 
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -39,6 +42,10 @@ public class MazoRest {
 		if (jugador != null) {
 			// si existe el jugador retornamos sus mazos.
 			mazos = mazoDAO.getAll(idJugador);
+			//retornar el numero de tarjetas de ese mazo
+			for(Mazo mazo: mazos) {
+				mazo.setContador(tarjetaDAO.countTarjetasInMazo(idJugador, mazo.getNombre()));
+			}
 		} else {
 			response = Status.NOT_FOUND;
 		}

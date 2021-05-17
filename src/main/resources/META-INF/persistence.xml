@@ -8,6 +8,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/MySqlPoolPf</jta-data-source>
         <properties>
+       	 	<property name="packagesToScan" value="com.quiz-server.entities" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="none" /> <!--SOF=40573342-->
             <property name="hibernate.show_sql" value="true" />
