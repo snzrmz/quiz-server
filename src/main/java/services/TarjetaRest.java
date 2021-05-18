@@ -6,13 +6,20 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import daoimp.MazoDaoImp;
 import daoimp.TarjetaDaoImp;
+import entities.Mazo;
 import entities.Tarjeta;
 
 @ApplicationScoped
@@ -20,6 +27,8 @@ import entities.Tarjeta;
 public class TarjetaRest {
 	@Inject
 	private TarjetaDaoImp tarjetaDAO;
+	@Inject
+	private MazoDaoImp mazoDAO;
 
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -30,9 +39,63 @@ public class TarjetaRest {
 	
 	@Path("/{idTarjeta}")
 	@GET
-	@Produces
+	@Produces(APPLICATION_JSON)
 	public Response getTarjetas(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo, @PathParam("idTarjeta") int idTarjeta) {
 		Tarjeta tarjeta = tarjetaDAO.getOne(idTarjeta);
 		return Response.ok(tarjeta).build();
+	}
+	
+	@POST
+	@Consumes(APPLICATION_JSON)
+	public Response postTarjeta(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo, Tarjeta tarjeta) {
+		Mazo mazo = mazoDAO.getOne(idJugador, nombreMazo);
+		Response.Status response = Response.Status.OK;
+		if(mazo!=null) {
+			tarjetaDAO.create(tarjeta);
+		} else {
+			response = Response.Status.NOT_FOUND;
+		}
+		
+		if (response == Status.OK) {
+			return Response.ok().build();
+		} else {
+			return Response.status(response).build();
+		}
+	}
+	
+	@PUT
+	@Consumes(APPLICATION_JSON)
+	public Response putTarjeta(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo, Tarjeta tarjeta) {
+		Mazo mazo = mazoDAO.getOne(idJugador, nombreMazo);
+		Response.Status response = Response.Status.OK;
+		if(mazo!=null) {
+			tarjetaDAO.update(tarjeta);
+		} else {
+			response = Response.Status.NOT_FOUND;
+		}
+		
+		if (response == Status.OK) {
+			return Response.ok().build();
+		} else {
+			return Response.status(response).build();
+		}
+	}
+	
+	@DELETE
+	@Consumes(APPLICATION_JSON)
+	public Response deleteTarjeta(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo, Tarjeta tarjeta) {
+		Mazo mazo = mazoDAO.getOne(idJugador, nombreMazo);
+		Response.Status response = Response.Status.OK;
+		if(mazo!=null) {
+			tarjetaDAO.delete(tarjeta);
+		} else {
+			response = Response.Status.NOT_FOUND;
+		}
+		
+		if (response == Status.OK) {
+			return Response.ok().build();
+		} else {
+			return Response.status(response).build();
+		}
 	}
 }

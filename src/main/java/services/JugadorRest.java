@@ -21,11 +21,12 @@ import daoimp.JugadorDaoImp;
 import entities.Jugador;
 
 @ApplicationScoped
-@Path("/jugadores/{id}")
+@Path("/jugadores")
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
 
+	@Path("/{id}")
 	@GET
 	@Produces(APPLICATION_JSON)
 	public Response getById(@PathParam("id") int idJugador) {
@@ -40,7 +41,7 @@ public class JugadorRest {
 
 	@PUT
 	@Consumes(APPLICATION_JSON)
-	public Response putUsuario(@PathParam("id") int idJugador, Jugador jugador) {
+	public Response putUsuario(Jugador jugador) {
 		Response.Status responseStatus = Response.Status.OK;
 		jugadorDAO.update(jugador);
 		return Response.status(responseStatus).build();

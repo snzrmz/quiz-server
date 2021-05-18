@@ -21,7 +21,6 @@ import daoimp.JugadorDaoImp;
 import daoimp.MazoDaoImp;
 import entities.Jugador;
 import entities.Mazo;
-import daoimp.TarjetaDaoImp;
 
 @ApplicationScoped
 @Path("jugadores/{id}/mazos")
@@ -30,8 +29,6 @@ public class MazoRest {
 	private MazoDaoImp mazoDAO;
 	@Inject
 	private JugadorDaoImp jugadorDAO;
-	@Inject
-	private TarjetaDaoImp tarjetaDAO;
 
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -76,10 +73,9 @@ public class MazoRest {
 		}
 	}
 	
-	@Path("/{nombre}")
 	@POST
 	@Consumes(APPLICATION_JSON)
-	public Response createMazo(@PathParam("id") int idJugador, @PathParam("nombre") String nombre, Mazo mazo) {
+	public Response createMazo(@PathParam("id") int idJugador, Mazo mazo) {
 		Jugador jugador = jugadorDAO.getOne(idJugador);
 		Response.Status response = Response.Status.OK;
 		String nombreMazo = null;
@@ -99,10 +95,9 @@ public class MazoRest {
 		}
 	}
 	
-	@Path("/{nombre}")
 	@PUT
 	@Consumes(APPLICATION_JSON)
-	public Response updateMazo(@PathParam("id") int idJugador, @PathParam("nombre") String nombre, Mazo mazo) {
+	public Response updateMazo(@PathParam("id") int idJugador, Mazo mazo) {
 		Jugador jugador = jugadorDAO.getOne(idJugador);
 		Response.Status response = Response.Status.OK;
 		if (jugador != null) {
@@ -118,10 +113,9 @@ public class MazoRest {
 		}
 	}
 	
-	@Path("/{nombre}")
 	@DELETE
 	@Consumes(APPLICATION_JSON)
-	public Response deleteMazo(@PathParam("id") int idJugador, @PathParam("nombre") String nombre, Mazo mazo) {
+	public Response deleteMazo(@PathParam("id") int idJugador, Mazo mazo) {
 		Jugador jugador = jugadorDAO.getOne(idJugador);
 		Response.Status response = Response.Status.OK;
 		if (jugador != null) {
