@@ -34,15 +34,23 @@ public class TarjetaRest {
 	@Produces(APPLICATION_JSON)
 	public Response getAllOfMazo(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo) {
 		List<Tarjeta> tarjetas = tarjetaDAO.getAllOfMazo(nombreMazo, idJugador);
-		return Response.ok(tarjetas).build();
+		if(tarjetas!=null) {
+			return Response.ok(tarjetas).build();
+		} else {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
 	}
 	
 	@Path("/{idTarjeta}")
 	@GET
 	@Produces(APPLICATION_JSON)
-	public Response getTarjetas(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo, @PathParam("idTarjeta") int idTarjeta) {
+	public Response getTarjetas(@PathParam("idTarjeta") int idTarjeta) {
 		Tarjeta tarjeta = tarjetaDAO.getOne(idTarjeta);
-		return Response.ok(tarjeta).build();
+		if(tarjeta!=null) {
+			return Response.ok(tarjeta).build();
+		} else {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
 	}
 	
 	@POST

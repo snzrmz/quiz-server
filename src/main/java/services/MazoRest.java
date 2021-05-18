@@ -80,7 +80,8 @@ public class MazoRest {
 		Response.Status response = Response.Status.OK;
 		String nombreMazo = null;
 		if (jugador!=null) {
-			mazoDAO.create(mazo);
+			nombreMazo=mazoDAO.create(mazo);
+			
 			if (nombreMazo == null) {
 				response = Status.NOT_FOUND;
 			}
