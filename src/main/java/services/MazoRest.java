@@ -42,10 +42,6 @@ public class MazoRest {
 		if (jugador != null) {
 			// si existe el jugador retornamos sus mazos.
 			mazos = mazoDAO.getAll(idJugador);
-			//retornar el numero de tarjetas de ese mazo
-			for(Mazo mazo: mazos) {
-				mazo.setContador(tarjetaDAO.countTarjetasInMazo(idJugador, mazo.getNombre()));
-			}
 		} else {
 			response = Status.NOT_FOUND;
 		}

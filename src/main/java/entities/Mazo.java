@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 
-import javax.json.bind.annotation.JsonbVisibility;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,7 +11,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+
+import org.hibernate.annotations.Formula;
 
 
 @Entity
@@ -30,8 +30,8 @@ public class Mazo implements Serializable {
 	@JoinColumn(name = "idJugador", referencedColumnName = "idJugador", insertable = false, updatable = false)
 	private Jugador jugador;
 	
-	@JsonInclude()
-	@Transient
+	
+	@Formula("(SELECT count(*) from Tarjeta t where idJugador = t.idJugador and nombre = t.nombreMazo)")
 	private int contador;
 	
 	/*

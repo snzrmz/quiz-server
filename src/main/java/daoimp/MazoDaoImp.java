@@ -18,13 +18,16 @@ public class MazoDaoImp implements MazoDao {
 
 	@Override
 	public Mazo getOne(int idJugador, String nombreMazo) {
-		return em.createNamedQuery("Mazo.getById", Mazo.class)
+		return (Mazo) em.createNativeQuery("select *, (SELECT count(*) from Tarjeta t where m.idJugador = t.idJugador and m.nombre = t.nombreMazo) as cuenta"
+				+ "from Mazo m");
+		/*return em.createNamedQuery("Mazo.getById", Mazo.class)
 				.setParameter("idJugador", idJugador)
-				.setParameter("nombreMazo",nombreMazo).getSingleResult();
+				.setParameter("nombreMazo",nombreMazo).getSingleResult();*/
 	}
 
 	@Override
 	public List<Mazo> getAll(int idJugador) {
+	
 		return em.createNamedQuery("Mazo.getAllFrom", Mazo.class).setParameter("idJugador", idJugador).getResultList();
 	}
 

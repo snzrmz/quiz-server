@@ -96,7 +96,7 @@ public class TarjetaDaoImp implements TarjetaDao {
 		return resultList;
 	}
 
-	@Override
+	/*@Override
 	public int countTarjetasInMazo(int idJugador, String nombreMazo) {
 		Object obj = em.createNamedQuery("Tarjeta.countInMazo", Long.class).setParameter("idJugador", idJugador)
 				.setParameter("nombreMazo", nombreMazo).getSingleResult();
@@ -106,7 +106,7 @@ public class TarjetaDaoImp implements TarjetaDao {
 		    }
 
 		    return Integer.valueOf(0);
-	}
+	}*/
 
 
 }
