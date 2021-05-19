@@ -1,6 +1,7 @@
 package daoimp;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import dao.RepasoDao;
 import entities.Repaso;
 
+@RequestScoped
 public class RepasoDaoImp implements RepasoDao {
 	@PersistenceContext
 	private EntityManager em;

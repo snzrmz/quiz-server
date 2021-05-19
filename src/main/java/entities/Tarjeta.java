@@ -14,8 +14,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 		@NamedQuery(name = "Tarjeta.getOne", query = "SELECT t FROM Tarjeta t WHERE t.idTarjeta = :idTarjeta"),
 		@NamedQuery(name = "Tarjeta.getOfMazo", query = "SELECT t FROM Tarjeta t "
-				+ "WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo"),
-		@NamedQuery(name = "Tarjeta.countInMazo", query = "SELECT count(t) FROM Tarjeta t WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo")})
+				+ "WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo")})
 public class Tarjeta implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
