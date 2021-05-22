@@ -26,8 +26,8 @@ import entities.MazoPK;
 
 @ApplicationScoped
 @Path("jugadores/{id}/mazos")
-public class MazoRest{
-	
+public class MazoRest {
+
 	@Inject
 	private MazoDaoImp mazoDAO;
 	@Inject
@@ -52,7 +52,7 @@ public class MazoRest{
 			return Response.status(response).build();
 		}
 	}
-	
+
 	@Path("/{nombre}")
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -75,20 +75,16 @@ public class MazoRest{
 			return Response.status(response).build();
 		}
 	}
-	
-	
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createMazo(MazoPK mazopk) {
-		
 		Mazo mazo = new Mazo();
 		mazo.setMazoPK(mazopk);
 		mazoDAO.create(mazo);
-		
 		return Response.status(Response.Status.CREATED).build();
 	}
-	
+
 	@Path("/{nombre}")
 	@PUT
 	@Consumes(APPLICATION_JSON)
@@ -102,34 +98,31 @@ public class MazoRest{
 		} else {
 			response = Status.NOT_FOUND;
 		}
-		
+
 		if (response == Status.OK) {
 			return Response.ok().build();
 		} else {
 			return Response.status(response).build();
 		}
 	}
-	
+
 	@Path("/{nombre}")
 	@DELETE
 	@Consumes(APPLICATION_JSON)
-	public Response deleteMazo(@PathParam("id") int idJugador, Mazo mazo) {
+	public Response deleteMazo(@PathParam("id") int idJugador, @PathParam("nombre") String nombre) {
 		Jugador jugador = jugadorDAO.getOne(idJugador);
 		Response.Status response = Response.Status.OK;
 		if (jugador != null) {
+			Mazo mazo = mazoDAO.getOne(idJugador, nombre);
 			mazoDAO.delete(mazo);
 		} else {
 			response = Status.NOT_FOUND;
 		}
-		
 		if (response == Status.OK) {
 			return Response.ok().build();
 		} else {
 			return Response.status(response).build();
 		}
 	}
-
-
-	
 
 }

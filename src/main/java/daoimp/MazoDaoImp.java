@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import dao.MazoDao;
 import entities.Mazo;
+import entities.MazoPK;
 
 @RequestScoped
 public class MazoDaoImp implements MazoDao {
@@ -33,7 +34,8 @@ public class MazoDaoImp implements MazoDao {
 	public void delete(Mazo mazo) {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		em.remove(mazo);
+		/*https://stackoverflow.com/a/17027553*/
+		em.remove(em.contains(mazo) ? mazo : em.merge(mazo));
 		et.commit();
 		
 	}
