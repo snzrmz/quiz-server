@@ -14,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -21,10 +22,12 @@ import daoimp.JugadorDaoImp;
 import daoimp.MazoDaoImp;
 import entities.Jugador;
 import entities.Mazo;
+import entities.MazoPK;
 
 @ApplicationScoped
 @Path("jugadores/{id}/mazos")
-public class MazoRest {
+public class MazoRest{
+	
 	@Inject
 	private MazoDaoImp mazoDAO;
 	@Inject
@@ -73,35 +76,28 @@ public class MazoRest {
 		}
 	}
 	
+	
+	
 	@POST
-	@Consumes(APPLICATION_JSON)
-	public Response createMazo(@PathParam("id") int idJugador, Mazo mazo) {
-		Jugador jugador = jugadorDAO.getOne(idJugador);
-		Response.Status response = Response.Status.OK;
-		String nombreMazo = null;
-		if (jugador!=null) {
-			nombreMazo=mazoDAO.create(mazo);
-			
-			if (nombreMazo == null) {
-				response = Status.NOT_FOUND;
-			}
-		} else {
-			response = Status.NOT_FOUND;
-		}
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createMazo(MazoPK mazopk) {
 		
-		if (response == Status.OK) {
-			return Response.ok(nombreMazo).build();
-		} else {
-			return Response.status(response).build();
-		}
+		Mazo mazo = new Mazo();
+		mazo.setMazoPK(mazopk);
+		mazoDAO.create(mazo);
+		
+		return Response.status(Response.Status.CREATED).build();
 	}
 	
+	@Path("/{nombre}")
 	@PUT
 	@Consumes(APPLICATION_JSON)
-	public Response updateMazo(@PathParam("id") int idJugador, Mazo mazo) {
+	@Produces("application/json")
+	public Response updateMazo(@PathParam("id") int idJugador, @PathParam("nombre") String nombreMazo) {
 		Jugador jugador = jugadorDAO.getOne(idJugador);
 		Response.Status response = Response.Status.OK;
-		if (jugador != null) {
+		Mazo mazo = mazoDAO.getOne(idJugador, nombreMazo);
+		if (jugador != null && mazo != null) {
 			mazoDAO.update(mazo);
 		} else {
 			response = Status.NOT_FOUND;
@@ -114,6 +110,7 @@ public class MazoRest {
 		}
 	}
 	
+	@Path("/{nombre}")
 	@DELETE
 	@Consumes(APPLICATION_JSON)
 	public Response deleteMazo(@PathParam("id") int idJugador, Mazo mazo) {
@@ -131,4 +128,8 @@ public class MazoRest {
 			return Response.status(response).build();
 		}
 	}
+
+
+	
+
 }

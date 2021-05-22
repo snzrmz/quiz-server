@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,10 +17,11 @@ import org.hibernate.annotations.Formula;
 
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Mazo.getById", query = "SELECT m " + "FROM Mazo m"),
+@NamedQueries({ @NamedQuery(name = "Mazo.getById", query = "SELECT m FROM Mazo m where m.jugador.idJugador = :idJugador AND m.mazoPK.nombre = :nombreMazo"),
 		@NamedQuery(name = "Mazo.getAllFrom", query = "SELECT m " + "FROM Mazo m "
 				+ "WHERE m.jugador.idJugador = :idJugador") })
 @XmlRootElement
+
 public class Mazo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -50,13 +52,17 @@ public class Mazo implements Serializable {
 	public void setMazoPK(MazoPK mazoPK) {
 		this.mazoPK = mazoPK;
 	}
+	
+	public MazoPK getMazoPK() {
+		return this.mazoPK;
+	}
 
 	public String getNombre() {
-		return mazoPK.nombre;
+		return mazoPK.getNombre();
 	}
 
 	public int getIdJugador() {
-		return mazoPK.idJugador;
+		return mazoPK.getIdJugador();
 	}
 
 	public int getContador() {
@@ -66,6 +72,8 @@ public class Mazo implements Serializable {
 	public void setContador(int contador) {
 		this.contador = contador;
 	}
+	
+
 
 	
 	/*

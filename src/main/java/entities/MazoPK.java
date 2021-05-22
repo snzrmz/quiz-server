@@ -8,8 +8,8 @@ import javax.persistence.Embeddable;
 public class MazoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	protected int idJugador;
-	protected String nombre;
+	private int idJugador;
+	private String nombre;
 
 	public MazoPK() {
 	}
@@ -45,6 +45,22 @@ public class MazoPK implements Serializable {
 		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
+	}
+
+	public int getIdJugador() {
+		return idJugador;
+	}
+
+	public void setIdJugador(int idJugador) {
+		this.idJugador = idJugador;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }
