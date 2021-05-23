@@ -15,10 +15,12 @@ public class Respuesta implements Serializable {
 	@Id
 	private int idRespuesta;
 	private String valor;
-	private boolean correcta;
+	private int correcta;
 	@ManyToOne
 	@JoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false)
 	private Tarjeta_Respuesta_Multiple TarjetaRespuestaMultiple;
+	
+	private int idTarjeta;
 	
 	public int getIdRespuesta() {
 		return idRespuesta;
@@ -32,11 +34,24 @@ public class Respuesta implements Serializable {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
-	public boolean isCorrecta() {
+	public int correcta() {
 		return correcta;
 	}
-	public void setCorrecta(boolean correcta) {
+	public void correcta(int correcta) {
 		this.correcta = correcta;
+	}
+	public Tarjeta_Respuesta_Multiple getTarjetaRespuestaMultiple() {
+		return TarjetaRespuestaMultiple;
+	}
+	
+	public void setTarjetaRespuestaMultiple(Tarjeta_Respuesta_Multiple tarjetaRespuestaMultiple) {
+		TarjetaRespuestaMultiple = tarjetaRespuestaMultiple;
+	}
+	public int getIdTarjeta() {
+		return idTarjeta;
+	}
+	public void setIdTarjeta(int idTarjeta) {
+		this.idTarjeta = idTarjeta;
 	}
 
 }
