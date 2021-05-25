@@ -37,12 +37,12 @@ public class TarjetaDaoImp implements TarjetaDao {
 	}
 
 	@Override
-	public int create(Tarjeta tarjeta) {
+	public Tarjeta create(Tarjeta tarjeta) {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		em.persist(tarjeta);
 		et.commit();
-		return tarjeta.getIdTarjeta();
+		return tarjeta;
 	}
 
 	@Override

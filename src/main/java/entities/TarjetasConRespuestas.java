@@ -12,14 +12,16 @@ public class TarjetasConRespuestas {
 	private String pregunta;
 	private String valor;
 	private int correcta;
+	private String recursoRuta;
 
-	public TarjetasConRespuestas(int idTarjeta, String tipoRespuesta, int idJugador, String pregunta, String valor, int correcta) {
+	public TarjetasConRespuestas(int idTarjeta, String tipoRespuesta, int idJugador, String pregunta, String valor, int correcta, String recursoRuta) {
 		this.idTarjeta = idTarjeta;
 		this.tipoRespuesta = tipoRespuesta;
 		this.idJugador = idJugador;
 		this.pregunta = pregunta;
 		this.valor = valor;
 		this.correcta = correcta;
+		this.recursoRuta = recursoRuta;
 	}
 	public TarjetasConRespuestas() {
 
@@ -71,6 +73,12 @@ public class TarjetasConRespuestas {
 
 	public void setValor(String valor) {
 		this.valor = valor;
+	}
+	public String getRecursoRuta() {
+		return recursoRuta;
+	}
+	public void setRecursoRuta(String recurso) {
+		this.recursoRuta = recurso;
 	}
 
 }

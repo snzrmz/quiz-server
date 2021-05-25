@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -17,7 +19,7 @@ import javax.persistence.NamedQuery;
 				+ "WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo")})
 public class Tarjeta implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idTarjeta;
 	private String tipoRespuesta;
 	private int idJugador;
@@ -29,7 +31,8 @@ public class Tarjeta implements Serializable {
 	private Mazo mazo;
 
 	private String pregunta;
-
+	private String recursoRuta;
+	
 	public int getIdTarjeta() {
 		return idTarjeta;
 	}
@@ -76,6 +79,14 @@ public class Tarjeta implements Serializable {
 
 	public void setPregunta(String pregunta) {
 		this.pregunta = pregunta;
+	}
+
+	public String getRecursoRuta() {
+		return recursoRuta;
+	}
+
+	public void setRecursoRuta(String recurso) {
+		this.recursoRuta = recurso;
 	}
 
 }

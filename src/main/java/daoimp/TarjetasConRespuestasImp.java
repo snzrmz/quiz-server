@@ -18,7 +18,7 @@ public class TarjetasConRespuestasImp implements TarjetasConRespuestasDao {
 	public List<TarjetasConRespuestas> getAll(int idJugador, String nombreMazo) {
 		// Se emula UNION combinando las dos listas
 		String queryRespuestaUnicas = "SELECT "
-				+ "new entities.TarjetasConRespuestas(t.idTarjeta, t.tipoRespuesta, t.idJugador, t.pregunta, tru.valor, (1) as correcta) "
+				+ "new entities.TarjetasConRespuestas(t.idTarjeta, t.tipoRespuesta, t.idJugador, t.pregunta, tru.valor, (1) as correcta, t.recursoRuta) "
 				+ "FROM Tarjeta t INNER JOIN Tarjeta_Respuesta_Unica tru " + "ON t.idTarjeta = tru.idTarjeta "
 				+ "WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo ";
 		List<TarjetasConRespuestas> tarjetasRespuestaUnica = em
@@ -26,7 +26,7 @@ public class TarjetasConRespuestasImp implements TarjetasConRespuestasDao {
 				.setParameter("nombreMazo", nombreMazo).getResultList();
 
 		String queryRespuestasMultiples = "SELECT "
-				+ "new entities.TarjetasConRespuestas(t.idTarjeta, t.tipoRespuesta, t.idJugador, t.pregunta, r.valor, r.correcta) "
+				+ "new entities.TarjetasConRespuestas(t.idTarjeta, t.tipoRespuesta, t.idJugador, t.pregunta, r.valor, r.correcta, t.recursoRuta) "
 				+ "FROM Tarjeta t INNER JOIN Tarjeta_Respuesta_Multiple trm " + "ON t.idTarjeta = trm.idTarjeta "
 				+ "INNER JOIN Respuesta r ON trm.idTarjeta = r.idTarjeta "
 				+ "WHERE t.idJugador = :idJugador and t.nombreMazo = :nombreMazo";

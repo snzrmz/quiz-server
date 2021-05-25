@@ -12,7 +12,7 @@ public interface TarjetaDao {
 	List<Tarjeta> getTarjetasAcertadas(int idRepaso, int idJugador, String nombreMazo);
 	List<Tarjeta> getTarjetasFalladas(int idRepaso, int idJugador, String nombreMazo);
 	/*int countTarjetasInMazo(int idJugador, String nombreMazo);*/
-	int create(Tarjeta tarjeta);
+	Tarjeta create(Tarjeta tarjeta);
 	void update(Tarjeta tarjeta);
 	void delete(Tarjeta tarjeta);
 }
