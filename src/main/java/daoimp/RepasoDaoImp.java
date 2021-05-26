@@ -16,12 +16,9 @@ public class RepasoDaoImp implements RepasoDao {
 	
 	@Override
 	public List<Repaso> getAllFrom(String nombreMazo, int idJugador) {
-		return em.createQuery("SELECT * "
-				+ "FROM Repaso "
-				+ "WHERE nombreMazo = :nombreMazo"
-				+ " AND idJugador = :idJugador", Repaso.class).
-				setParameter(1, nombreMazo).
-				setParameter(2, idJugador).getResultList();
+		return em.createQuery("SELECT r FROM Repaso r WHERE r.nombreMazo = :nombreMazo AND r.idJugador = :idJugador", Repaso.class).
+				setParameter("nombreMazo", nombreMazo).
+				setParameter("idJugador", idJugador).getResultList();
 		
 	}
 

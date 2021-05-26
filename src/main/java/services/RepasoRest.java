@@ -13,12 +13,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
-import daoimp.MazoDaoImp;
 import daoimp.RepasoDaoImp;
-import entities.Mazo;
+import daoimp.TarjetaRepasoAcertadoDaoImp;
+import daoimp.TarjetaRepasoFalladoDaoImp;
 import entities.Repaso;
+import entities.Tarjeta_Repaso_Acertado;
+import entities.Tarjeta_Repaso_Fallado;
 
 @ApplicationScoped
 @Path("jugadores/{id}/mazos/{nombreMazo}/repasos")
@@ -26,7 +27,9 @@ public class RepasoRest {
 	@Inject
 	private RepasoDaoImp repasoDAO;
 	@Inject
-	private MazoDaoImp mazoDAO;
+	private TarjetaRepasoAcertadoDaoImp tarjetaRepasoAcertadoDAO;
+	@Inject
+	private TarjetaRepasoFalladoDaoImp tarjetaReasoFalladoDAO;
 	
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -41,19 +44,21 @@ public class RepasoRest {
 	
 	@POST
 	@Consumes(APPLICATION_JSON)
-	public Response postRepaso(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo, Repaso repaso) {
-		Mazo mazo = mazoDAO.getOne(idJugador, nombreMazo);
-		Response.Status response = Response.Status.OK;
-		if(mazo!=null) {
-			repasoDAO.create(repaso);
-		} else {
-			response = Response.Status.NOT_FOUND;
+	public Response postRepaso(Repaso repaso) {
+			return Response.status(repasoDAO.create(repaso)).build();
 		}
-		
-		if (response == Status.OK) {
-			return Response.ok().build();
-		} else {
-			return Response.status(response).build();
+	
+	@Path("/{idRepaso}/tarjeta/{idTarjeta}/acertada")
+	@POST
+	@Consumes(APPLICATION_JSON)
+	public Response postRepasoTarjetaAcertada(Tarjeta_Repaso_Acertado repasoAcertado) {
+			return Response.ok(tarjetaRepasoAcertadoDAO.create(repasoAcertado)).build();
 		}
-	}
+	
+	@Path("/{idRepaso}/tarjeta/{idTarjeta}/fallada")
+	@POST
+	@Consumes(APPLICATION_JSON)
+	public Response postRepasoTarjetaFallada(Tarjeta_Repaso_Fallado repasoFallado) {
+			return Response.ok(tarjetaReasoFalladoDAO.create(repasoFallado)).build();
+		}
 }

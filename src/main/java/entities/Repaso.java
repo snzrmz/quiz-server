@@ -29,12 +29,15 @@ public class Repaso implements Serializable {
 	@JoinColumn(name = "idJugador", referencedColumnName = "idJugador", insertable = false, updatable = false)
 	private Jugador jugador;
 	
+	private int idJugador;
+	
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name = "idJugador", referencedColumnName = "idJugador", insertable = false, updatable = false),
 		@JoinColumn(name = "nombreMazo", referencedColumnName = "nombre", insertable = false, updatable = false) })
 	private Mazo mazo;
 	private LocalDate fechaHoraInicio;
+	private String nombreMazo;
 	
 	public boolean isFin() {
 		return fin;
@@ -53,6 +56,18 @@ public class Repaso implements Serializable {
 	}
 	public void setIdRepaso(int idRepaso) {
 		this.idRepaso = idRepaso;
+	}
+	public String getNombreMazo() {
+		return nombreMazo;
+	}
+	public void setNombreMazo(String nombreMazo) {
+		this.nombreMazo = nombreMazo;
+	}
+	public int getIdJugador() {
+		return idJugador;
+	}
+	public void setIdJugador(int idJugador) {
+		this.idJugador = idJugador;
 	}
 	
 	
