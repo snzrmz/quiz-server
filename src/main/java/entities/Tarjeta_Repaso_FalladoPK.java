@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Tarjeta_Repaso_FalladoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	protected int idTarjeta;
-	protected int idRepaso;
+	protected int Tarjeta_idTarjeta;
+	protected int Repaso_idRepaso;
 
 	public Tarjeta_Repaso_FalladoPK() {
 	}
 	
 
 	public Tarjeta_Repaso_FalladoPK(int idTarjeta, int idRepaso) {
-		this.idTarjeta = idTarjeta;
-		this.idRepaso = idRepaso;
+		this.Tarjeta_idTarjeta = idTarjeta;
+		this.Repaso_idRepaso = idRepaso;
 	}
 
 
@@ -27,8 +27,8 @@ public class Tarjeta_Repaso_FalladoPK implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idRepaso;
-		result = prime * result + idTarjeta;
+		result = prime * result + Repaso_idRepaso;
+		result = prime * result + Tarjeta_idTarjeta;
 		return result;
 	}
 
@@ -41,9 +41,9 @@ public class Tarjeta_Repaso_FalladoPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Tarjeta_Repaso_FalladoPK other = (Tarjeta_Repaso_FalladoPK) obj;
-		if (idRepaso != other.idRepaso)
+		if (Repaso_idRepaso != other.Repaso_idRepaso)
 			return false;
-		if (idTarjeta != other.idTarjeta)
+		if (Tarjeta_idTarjeta != other.Tarjeta_idTarjeta)
 			return false;
 		return true;
 	}

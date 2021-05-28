@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 public class Tarjeta_Respuesta_Multiple implements Serializable {
 
@@ -14,9 +11,26 @@ public class Tarjeta_Respuesta_Multiple implements Serializable {
 	@Id
 	private int idTarjeta;
 	
-	@ManyToOne
-	@PrimaryKeyJoinColumn(name = "idTarjeta")
-	private Tarjeta tarjeta;
+
+	
+
+	/*public int getIdTarjeta() {
+		return idTarjeta;
+	}*/
+
+	/*public void setIdTarjeta(int idTarjeta) {
+		this.idTarjeta = idTarjeta;
+	}*/
+
+
+	/*public Tarjeta getTarjeta() {
+		return tarjeta;
+	}*/
+
+	/*public void setTarjeta(Tarjeta tarjeta) {
+		this.tarjeta = tarjeta;
+	}*/
+	
 	
 	
 }

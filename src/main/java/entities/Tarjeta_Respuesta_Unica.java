@@ -17,9 +17,6 @@ public class Tarjeta_Respuesta_Unica implements Serializable {
 	@Id
 	private int idTarjeta;
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn(name = "idTarjeta")
-	private Tarjeta tarjeta;
 	
 	private String valor;
 	
