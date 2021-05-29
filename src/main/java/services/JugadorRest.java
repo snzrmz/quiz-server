@@ -42,8 +42,13 @@ public class JugadorRest {
 	@PUT
 	@Consumes(APPLICATION_JSON)
 	public Response putUsuario(Jugador jugador) {
+		Jugador jaux = new Jugador();
+		jaux = jugadorDAO.getOne(jugador.getIdJugador());
+		jaux.setContrasena(jugador.getContrasena());
+		jaux.setEmail(jugador.getEmail());
+		jaux.setUsuario(jugador.getUsuario());
 		Response.Status responseStatus = Response.Status.OK;
-		jugadorDAO.update(jugador);
+		jugadorDAO.update(jaux);
 		return Response.status(responseStatus).build();
 	}
 

@@ -23,8 +23,8 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 	@Id
 	private int Repaso_idRepaso;
 	
-	
-	
+
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Repaso_idRepaso", referencedColumnName="idRepaso", insertable = false, updatable = false)
 	private Repaso repaso;
@@ -34,12 +34,13 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 	private Tarjeta tarjeta;
 	
 	
-	public int getIdRepaso() {
+	
+	public int getRepaso_idRepaso() {
 		return Repaso_idRepaso;
 	}
 
-	public void setIdRepaso(int idRepaso) {
-		this.Repaso_idRepaso = idRepaso;
+	public void setRepaso_idRepaso(int repaso_idRepaso) {
+		Repaso_idRepaso = repaso_idRepaso;
 	}
 	
 	public int getTarjeta_idTarjeta() {
@@ -54,6 +55,6 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 		this.repaso = repaso;
 	}
 
-	
+
 	
 }
