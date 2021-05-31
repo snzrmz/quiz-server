@@ -2,16 +2,20 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.MapsId;
 
-
+@Embeddable
 public class Tarjeta_Repaso_AcertadoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int Tarjeta_idTarjeta;
+	
 	private int Repaso_idRepaso;
 	
-	public Tarjeta_Repaso_AcertadoPK(int idTarjeta, int idRepaso) {
+	public Tarjeta_Repaso_AcertadoPK (int idTarjeta, int idRepaso) {
 		this.Tarjeta_idTarjeta = idTarjeta;
 		this.Repaso_idRepaso = idRepaso;
 	}

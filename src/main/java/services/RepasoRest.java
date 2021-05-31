@@ -39,23 +39,24 @@ public class RepasoRest {
 	@Produces(APPLICATION_JSON)
 	public Response getAllFrom(@PathParam("id") int idJugador, @PathParam("nombreMazo") String nombreMazo) {
 		List<Repaso> repasos = repasoDAO.getAllFrom(nombreMazo, idJugador);
-		//System.out.println(repasos.get(0).getTarjetaRepasoFallado().get(0).getTarjeta_IdTarjeta());
+		// System.out.println(repasos.get(0).getTarjetaRepasoFallado().get(0).getTarjeta_IdTarjeta());
 		return Response.ok(repasos).build();
 	}
 
 	@POST
 	@Consumes(APPLICATION_JSON)
 	public Response postRepaso(@Context UriInfo uriInfo, Repaso repaso) {
-		//int idRepaso = repasoDAO.create(repaso);
-		System.out.println(repaso);
-		//if (idRepaso != -1) {
-			List<Tarjeta_Repaso_Acertado> tja = repaso.getTarjetaRepasoAcertado();
-			//List<Tarjeta_Repaso_Fallado> tjf = repaso.getTarjetaRepasoFallado();
-			
-				/*repaso.getTarjetaRepasoAcertado().forEach(r->{
-				System.out.println(r.getRepaso());
-				});*/
-				
+		int idRepaso = repasoDAO.create(repaso);
+
+		if (idRepaso != -1) {
+			System.out.println(idRepaso);
+			// List<Tarjeta_Repaso_Acertado> tja = repaso.getTarjetaRepasoAcertado();
+			// List<Tarjeta_Repaso_Fallado> tjf = repaso.getTarjetaRepasoFallado();
+
+			/*
+			 * repaso.getTarjetaRepasoAcertado().forEach(r->{
+			 * System.out.println(r.getRepaso()); });
+			 */
 
 			/*
 			 * tarjetaRepasoAcertadoDAO.createListOf(tja);
@@ -63,13 +64,12 @@ public class RepasoRest {
 			 */
 
 			UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
-			URI uri = uriBuilder.path(Integer.toString(1)).build();
+			URI uri = uriBuilder.path(Integer.toString(idRepaso)).build();
 			return Response.created(uri).build();
-		//} else {
-			//Response.Status responseStatus = Response.Status.NOT_FOUND;
-			//return Response.status(responseStatus).build();
-	//	}
+		} else {
+			Response.Status responseStatus = Response.Status.NOT_FOUND;
+			return Response.status(responseStatus).build();
+		}
 
 	}
-
 }
