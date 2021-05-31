@@ -5,16 +5,20 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
+import javax.persistence.GeneratedValue;
 import javax.persistence.MapsId;
 
 @Embeddable
 public class Tarjeta_Repaso_AcertadoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+	@GeneratedValue
+	@Column(name = "Tarjeta_idTarjeta")
 	private int Tarjeta_idTarjeta;
-	
+	@GeneratedValue
+	@Column(name = "Repaso_idRepaso")
 	private int Repaso_idRepaso;
 	
+
 	public Tarjeta_Repaso_AcertadoPK (int idTarjeta, int idRepaso) {
 		this.Tarjeta_idTarjeta = idTarjeta;
 		this.Repaso_idRepaso = idRepaso;
@@ -46,13 +50,23 @@ public class Tarjeta_Repaso_AcertadoPK implements Serializable {
 			return false;
 		return true;
 	}
-	public int getIdTarjeta() {
+	public int getTarjeta_IdTarjeta() {
 		return Tarjeta_idTarjeta;
 	}
-	public void setIdTarjeta(int idTarjeta) {
+	public void setTarjeta_IdTarjeta(int idTarjeta) {
 		this.Tarjeta_idTarjeta = idTarjeta;
 	}
 	
+	public int getRepaso_idRepaso() {
+		return Repaso_idRepaso;
+	}
+	public void setRepaso_idRepaso(int repaso_idRepaso) {
+		Repaso_idRepaso = repaso_idRepaso;
+	}
+	@Override
+	public String toString() {
+		return "{\"Tarjeta_idTarjeta\":\"" + Tarjeta_idTarjeta + "\", \"Repaso_idRepaso\":\"" + Repaso_idRepaso + "\"}";
+	}
 	
 	
 

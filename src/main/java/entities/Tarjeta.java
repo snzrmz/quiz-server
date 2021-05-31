@@ -30,8 +30,7 @@ import org.hibernate.annotations.Formula;
 				+ "WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo") })
 public class Tarjeta implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTarjeta;
 	private String tipoRespuesta;
 	private int idJugador;
@@ -51,6 +50,14 @@ public class Tarjeta implements Serializable {
 	@JoinColumns({
 			@JoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false) })
 	private Tarjeta_Respuesta_Unica respuesta;
+	
+	@OneToMany
+	@JoinColumn(name = "Tarjeta_idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false)
+	private List<Tarjeta_Repaso_Acertado> acertado;
+	
+	@OneToMany
+	@JoinColumn(name = "Tarjeta_idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false)
+	private List<Tarjeta_Repaso_Fallado> fallado;
 
 	private String pregunta;
 	private String recursoRuta;

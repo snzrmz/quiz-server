@@ -47,22 +47,8 @@ public class RepasoRest {
 	@Consumes(APPLICATION_JSON)
 	public Response postRepaso(@Context UriInfo uriInfo, Repaso repaso) {
 		int idRepaso = repasoDAO.create(repaso);
-
+		System.out.println(repaso);
 		if (idRepaso != -1) {
-			System.out.println(idRepaso);
-			// List<Tarjeta_Repaso_Acertado> tja = repaso.getTarjetaRepasoAcertado();
-			// List<Tarjeta_Repaso_Fallado> tjf = repaso.getTarjetaRepasoFallado();
-
-			/*
-			 * repaso.getTarjetaRepasoAcertado().forEach(r->{
-			 * System.out.println(r.getRepaso()); });
-			 */
-
-			/*
-			 * tarjetaRepasoAcertadoDAO.createListOf(tja);
-			 * tarjetaRepasoFalladoDAO.createListOf(tjf);
-			 */
-
 			UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
 			URI uri = uriBuilder.path(Integer.toString(idRepaso)).build();
 			return Response.created(uri).build();
@@ -72,4 +58,5 @@ public class RepasoRest {
 		}
 
 	}
+	
 }

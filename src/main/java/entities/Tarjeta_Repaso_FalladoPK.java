@@ -2,14 +2,16 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 
 @Embeddable
 public class Tarjeta_Repaso_FalladoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+	@Column(name = "Tarjeta_idTarjeta")
 	protected int Tarjeta_idTarjeta;
+	@Column(name = "Repaso_idRepaso")
 	protected int Repaso_idRepaso;
 
 	public Tarjeta_Repaso_FalladoPK() {
@@ -54,7 +56,7 @@ public class Tarjeta_Repaso_FalladoPK implements Serializable {
 
 
 	public void setidTarjeta(int tarjeta_idTarjeta) {
-		Tarjeta_idTarjeta = tarjeta_idTarjeta;
+		this.Tarjeta_idTarjeta= tarjeta_idTarjeta;
 	}
 
 

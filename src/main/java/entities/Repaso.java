@@ -63,12 +63,12 @@ public class Repaso implements Serializable {
 	private String nombreMazo;
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.ALL,  mappedBy="repaso")
-	private List<Tarjeta_Repaso_Acertado> tarjetaRepasoAcertado = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="repaso")
+	private List<Tarjeta_Repaso_Acertado> tarjetaRepasoAcertado;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="repaso")
-	private List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="repaso")
+	private List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado;
 	
 	
 	
