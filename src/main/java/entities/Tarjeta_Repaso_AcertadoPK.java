@@ -2,6 +2,8 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.MapsId;
+
 
 public class Tarjeta_Repaso_AcertadoPK implements Serializable {
 	private static final long serialVersionUID = 1L;

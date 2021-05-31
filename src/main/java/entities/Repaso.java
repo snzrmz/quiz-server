@@ -1,22 +1,19 @@
 package entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumns;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.LazyCollection;
@@ -29,36 +26,49 @@ public class Repaso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Repaso() {
-		super();
-		this.tarjetaRepasoAcertado = new ArrayList<>();
-		this.tarjetaRepasoFallado = new ArrayList<>();
+		
 	}
-	@Id
+	
+	
+	public Repaso(int idRepaso, boolean fin, int idJugador, LocalDateTime fechaHoraInicio, String nombreMazo,
+			List<Tarjeta_Repaso_Acertado> tarjetaRepasoAcertado, List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado) {
+		this.idRepaso = idRepaso;
+		this.fin = fin;
+		this.idJugador = idJugador;
+		this.fechaHoraInicio = fechaHoraInicio;
+		this.nombreMazo = nombreMazo;
+		this.tarjetaRepasoAcertado = tarjetaRepasoAcertado;
+		this.tarjetaRepasoFallado = tarjetaRepasoFallado;
+	}
+
+
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idRepaso;
 	
+	@Override
+	public String toString() {
+		return "{\"idRepaso\":\"" + idRepaso + "\", \"fin\":\"" + fin + "\", \"idJugador\":\"" + idJugador
+				+ "\", \"fechaHoraInicio\":\"" + fechaHoraInicio + "\", \"nombreMazo\":\"" + nombreMazo
+				+ "\", \"tarjetaRepasoAcertado\":\"" + tarjetaRepasoAcertado + "\", \"tarjetaRepasoFallado\":\""
+				+ tarjetaRepasoFallado + "\"}";
+	}
 	private boolean fin;
 	
-	@ManyToOne
-	@JoinColumn(name = "idJugador", referencedColumnName = "idJugador", insertable = false, updatable = false)
-	private Jugador jugador;
 	
 	private int idJugador;
 	
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name = "idJugador", referencedColumnName = "idJugador", insertable = false, updatable = false),
-		@JoinColumn(name = "nombreMazo", referencedColumnName = "nombre", insertable = false, updatable = false) })
-	private Mazo mazo;
-	private LocalDate fechaHoraInicio;
+	
+	@Column(name = "fechaHoraInicio", columnDefinition = "DATETIME" )
+	private LocalDateTime fechaHoraInicio;
 	private String nombreMazo;
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="repaso")
-	private List<Tarjeta_Repaso_Acertado> tarjetaRepasoAcertado;
-	
+	@OneToMany(cascade = CascadeType.ALL,  mappedBy="repaso")
+	private List<Tarjeta_Repaso_Acertado> tarjetaRepasoAcertado = new ArrayList<>();
+
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="repaso")
-	private List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado;
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="repaso")
+	private List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado = new ArrayList<>();
 	
 	
 	
@@ -68,10 +78,10 @@ public class Repaso implements Serializable {
 	public void setFin(boolean fin) {
 		this.fin = fin;
 	}
-	public LocalDate getFechaHoraInicio() {
+	public LocalDateTime getFechaHoraInicio() {
 		return fechaHoraInicio;
 	}
-	public void setFechaHoraInicio(LocalDate fechaHoraInicio) {
+	public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
 		this.fechaHoraInicio = fechaHoraInicio;
 	}
 	public int getIdRepaso() {

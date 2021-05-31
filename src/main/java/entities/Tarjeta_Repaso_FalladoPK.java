@@ -3,10 +3,9 @@ package entities;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 @Embeddable
-@XmlRootElement
 public class Tarjeta_Repaso_FalladoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -46,6 +45,26 @@ public class Tarjeta_Repaso_FalladoPK implements Serializable {
 		if (Tarjeta_idTarjeta != other.Tarjeta_idTarjeta)
 			return false;
 		return true;
+	}
+
+
+	public int getidTarjeta() {
+		return Tarjeta_idTarjeta;
+	}
+
+
+	public void setidTarjeta(int tarjeta_idTarjeta) {
+		Tarjeta_idTarjeta = tarjeta_idTarjeta;
+	}
+
+
+	public int getidRepaso() {
+		return Repaso_idRepaso;
+	}
+
+
+	public void setidRepaso(int repaso_idRepaso) {
+		Repaso_idRepaso = repaso_idRepaso;
 	}
 	
 	

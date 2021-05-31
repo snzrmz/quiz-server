@@ -16,7 +16,6 @@ public class Respuesta implements Serializable {
 	private int idRespuesta;
 	private String valor;
 	private int correcta;
-	
 	/*@ManyToOne
 	@JoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false)
 	private Tarjeta_Respuesta_Multiple TarjetaRespuestaMultiple;*/
@@ -35,7 +34,12 @@ public class Respuesta implements Serializable {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
-	
+	public int correcta() {
+		return correcta;
+	}
+	public void correcta(int correcta) {
+		this.correcta = correcta;
+	}
 	/*public Tarjeta_Respuesta_Multiple getTarjetaRespuestaMultiple() {
 		return TarjetaRespuestaMultiple;
 	}
@@ -48,12 +52,6 @@ public class Respuesta implements Serializable {
 	}
 	public void setIdTarjeta(int idTarjeta) {
 		this.idTarjeta = idTarjeta;
-	}
-	public int getCorrecta() {
-		return correcta;
-	}
-	public void setCorrecta(int correcta) {
-		this.correcta = correcta;
 	}
 
 }
