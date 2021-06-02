@@ -51,12 +51,10 @@ public class Tarjeta implements Serializable {
 			@JoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false) })
 	private Tarjeta_Respuesta_Unica respuesta;
 	
-	@OneToMany
-	@JoinColumn(name = "Tarjeta_idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false)
+	@OneToMany(mappedBy ="tarjeta")
 	private List<Tarjeta_Repaso_Acertado> acertado;
 	
-	@OneToMany
-	@JoinColumn(name = "Tarjeta_idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false)
+	@OneToMany(mappedBy ="tarjeta")
 	private List<Tarjeta_Repaso_Fallado> fallado;
 
 	private String pregunta;
@@ -138,6 +136,12 @@ public class Tarjeta implements Serializable {
 			this.respuestas = new ArrayList<>();
 		}
 		this.respuestas = respuestas;
+	}
+
+	@Override
+	public String toString() {
+		return "{\"idTarjeta\":\"" + idTarjeta + "\", \"tipoRespuesta\":\"" + tipoRespuesta + "\", \"idJugador\":\""
+				+ idJugador + "\", \"nombreMazo\":\"" + nombreMazo + "\", \"mazo\":\"" + mazo + "\"}";
 	}
 
 

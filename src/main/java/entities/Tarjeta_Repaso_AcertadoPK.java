@@ -6,15 +6,17 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 
 @Embeddable
 public class Tarjeta_Repaso_AcertadoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@GeneratedValue
+	
 	@Column(name = "Tarjeta_idTarjeta")
 	private int Tarjeta_idTarjeta;
-	@GeneratedValue
+	
 	@Column(name = "Repaso_idRepaso")
 	private int Repaso_idRepaso;
 	

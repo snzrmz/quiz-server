@@ -2,6 +2,7 @@ package services;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+import java.io.File;
 import java.net.URI;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -25,6 +26,23 @@ import entities.Jugador;
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
+	
+	@GET
+	@Path("/perfil/{nombreFichero}")
+	@Produces("images/jpeg")
+	public Response getFichero(@PathParam("nombreFichero") String nombreFichero) {
+		File fichero = new File("/home/miguelangel/Imágenes/" + nombreFichero);
+		return Response.ok(fichero).header("Content-Length", fichero.length()).build();
+	}
+
+	@PUT
+	@Path("/perfil/{nombreFichero}")
+	@Consumes("images/jpeg")
+	public Response putFichero(File fichero, @PathParam("nombreFichero") String nombreFichero) {
+		Response.Status responseStatus = Response.Status.OK;
+		fichero.renameTo(new File("/home/miguelangel/Imágenes/" + nombreFichero));
+		return Response.status(responseStatus).build();
+	}
 
 	@Path("/{id}")
 	@GET

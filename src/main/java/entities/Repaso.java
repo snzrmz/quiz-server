@@ -64,13 +64,11 @@ public class Repaso implements Serializable {
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="repaso")
-	private List<Tarjeta_Repaso_Acertado> tarjetaRepasoAcertado;
+	private List<Tarjeta_Repaso_Acertado> tarjetaRepasoAcertado = new ArrayList<>();
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="repaso")
-	private List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado;
-	
-	
+	private List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado = new ArrayList<>();
 	
 	public boolean isFin() {
 		return fin;
@@ -113,6 +111,60 @@ public class Repaso implements Serializable {
 	}
 	public void setTarjetaRepasoFallado(List<Tarjeta_Repaso_Fallado> tarjetaRepasoFallado) {
 		this.tarjetaRepasoFallado = tarjetaRepasoFallado;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fechaHoraInicio == null) ? 0 : fechaHoraInicio.hashCode());
+		result = prime * result + (fin ? 1231 : 1237);
+		result = prime * result + idJugador;
+		result = prime * result + idRepaso;
+		result = prime * result + ((nombreMazo == null) ? 0 : nombreMazo.hashCode());
+		result = prime * result + ((tarjetaRepasoAcertado == null) ? 0 : tarjetaRepasoAcertado.hashCode());
+		result = prime * result + ((tarjetaRepasoFallado == null) ? 0 : tarjetaRepasoFallado.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Repaso other = (Repaso) obj;
+		if (fechaHoraInicio == null) {
+			if (other.fechaHoraInicio != null)
+				return false;
+		} else if (!fechaHoraInicio.equals(other.fechaHoraInicio))
+			return false;
+		if (fin != other.fin)
+			return false;
+		if (idJugador != other.idJugador)
+			return false;
+		if (idRepaso != other.idRepaso)
+			return false;
+		if (nombreMazo == null) {
+			if (other.nombreMazo != null)
+				return false;
+		} else if (!nombreMazo.equals(other.nombreMazo))
+			return false;
+		if (tarjetaRepasoAcertado == null) {
+			if (other.tarjetaRepasoAcertado != null)
+				return false;
+		} else if (!tarjetaRepasoAcertado.equals(other.tarjetaRepasoAcertado))
+			return false;
+		if (tarjetaRepasoFallado == null) {
+			if (other.tarjetaRepasoFallado != null)
+				return false;
+		} else if (!tarjetaRepasoFallado.equals(other.tarjetaRepasoFallado))
+			return false;
+		return true;
 	}
 
 	

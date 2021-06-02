@@ -3,22 +3,16 @@ package entities;
 import java.io.Serializable;
 
 import javax.json.bind.annotation.JsonbProperty;
-import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
+import javax.persistence.MapsId;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.PrimaryKeyJoinColumns;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-
 @XmlRootElement
 public class Tarjeta_Repaso_Acertado implements Serializable {
 
@@ -27,46 +21,66 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EmbeddedId
 	private Tarjeta_Repaso_AcertadoPK traID;
-
+	@JsonbTransient
+	public Tarjeta_Repaso_AcertadoPK getTraID() {
+		return traID;
+	}
 	public void setTraID(Tarjeta_Repaso_AcertadoPK traID) {
 		this.traID = traID;
 	}
-	@PrePersist
-	   private void prePersiste() {
-	       if (traID == null) {
-	    	   Tarjeta_Repaso_AcertadoPK pk = new Tarjeta_Repaso_AcertadoPK();
-	           pk.setTarjeta_IdTarjeta(getTarjetaIdTarjeta());
-	           pk.setRepaso_idRepaso(repaso.getIdRepaso());
-	           setTraID(pk);
-	       }
-	   }
+	
 
-	@ManyToOne
+	@MapsId("Repaso_idRepaso")
+	@ManyToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn(name = "Repaso_idRepaso", referencedColumnName = "idRepaso")
 	private Repaso repaso;
 	
-	
-	@ManyToOne
+	@MapsId("Tarjeta_idTarjeta")
+	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "Tarjeta_idTarjeta", referencedColumnName = "idTarjeta")
 	private Tarjeta tarjeta;
 	
 
 	@JsonbProperty(value="Tarjeta_idTarjeta")
 	public int getTarjetaIdTarjeta() {
-		return tarjeta.getIdTarjeta();
+		return this.traID.getTarjeta_IdTarjeta();
 	}
 	@JsonbProperty(value="Repaso_idRepaso")
 	public int getRepasoIdRepaso() {
-		return traID.getRepaso_idRepaso();
-	}
-	@Override
-	public String toString() {
-		return "{\"traID\":\"" + traID + "\", \"repaso\":\"" + repaso + "\", \"tarjeta\":\"" + tarjeta + "\"}";
+		return this.traID.getRepaso_idRepaso();
 	}
 	
 
 
+	public Tarjeta_Repaso_Acertado() {
+	}
+	public Tarjeta_Repaso_Acertado(Tarjeta_Repaso_AcertadoPK traID, Repaso repaso, Tarjeta tarjeta) {
+		this.traID = traID;
+		this.repaso = repaso;
+		this.tarjeta = tarjeta;
+	}
+	public void setRepaso(Repaso repaso) {
+		this.repaso = repaso;
+	}
+	public void setIdTarjeta(int idTarjeta) {
+		this.tarjeta.getIdTarjeta();
+	}
 
+	public void setIdRepaso(int idRepaso) {
+		this.repaso.setIdRepaso(idRepaso);
+	}
+	public void setTarjeta(Tarjeta tarjeta) {
+		this.tarjeta = tarjeta;
+	}
+	@JsonbTransient
+	public Repaso getRepaso() {
+		return repaso;
+	}
+	@JsonbTransient
+	public Tarjeta getTarjeta() {
+		return tarjeta;
+	}
+	
 
 	
 }

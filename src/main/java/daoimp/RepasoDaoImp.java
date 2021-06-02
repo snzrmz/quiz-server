@@ -1,4 +1,5 @@
 package daoimp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -7,7 +8,10 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import dao.RepasoDao;
+import dao.TarjetaDao;
 import entities.Repaso;
+import entities.Tarjeta;
+import entities.Tarjeta_Repaso_Acertado;
 
 @RequestScoped
 public class RepasoDaoImp implements RepasoDao {
@@ -26,7 +30,19 @@ public class RepasoDaoImp implements RepasoDao {
 	public int create(Repaso repaso) {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		em.persist(repaso);
+		List <Tarjeta_Repaso_Acertado> tras = new ArrayList<>();
+		for(Tarjeta_Repaso_Acertado tra : repaso.getTarjetaRepasoAcertado()) {
+			
+			tra.setRepaso(repaso);
+			
+			//Tarjeta tarjeta ; necesito obtener tarjeta
+			
+			//tra.setTarjeta(tarjeta);
+			
+			tras.add(tra);
+		}
+		repaso.setTarjetaRepasoAcertado(tras);
+		em.merge(repaso);
 		et.commit();
 		return repaso.getIdRepaso();
 		
@@ -38,6 +54,9 @@ public class RepasoDaoImp implements RepasoDao {
 				.setParameter("idRepaso", idRepaso)
 				.getSingleResult();
 	}
+
 	
+	
+
 	
 }
