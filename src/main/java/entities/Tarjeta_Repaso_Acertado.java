@@ -43,7 +43,7 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 
 	@JsonbProperty(value="Tarjeta_idTarjeta")
 	public int getTarjetaIdTarjeta() {
-		return this.traID.getTarjeta_IdTarjeta();
+		return this.traID.getTarjeta_idTarjeta();
 	}
 	@JsonbProperty(value="Repaso_idRepaso")
 	public int getRepasoIdRepaso() {
@@ -54,6 +54,7 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 
 	public Tarjeta_Repaso_Acertado() {
 	}
+
 	public Tarjeta_Repaso_Acertado(Tarjeta_Repaso_AcertadoPK traID, Repaso repaso, Tarjeta tarjeta) {
 		this.traID = traID;
 		this.repaso = repaso;
@@ -63,7 +64,7 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 		this.repaso = repaso;
 	}
 	public void setIdTarjeta(int idTarjeta) {
-		this.tarjeta.getIdTarjeta();
+		this.tarjeta.setIdTarjeta(idTarjeta);
 	}
 
 	public void setIdRepaso(int idRepaso) {
@@ -72,6 +73,7 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 	public void setTarjeta(Tarjeta tarjeta) {
 		this.tarjeta = tarjeta;
 	}
+	
 	@JsonbTransient
 	public Repaso getRepaso() {
 		return repaso;
@@ -82,5 +84,9 @@ public class Tarjeta_Repaso_Acertado implements Serializable {
 	}
 	
 
+	@Override
+	public String toString() {
+		return "{\"traID\":\"" + traID + "\"}";
+	}
 	
 }

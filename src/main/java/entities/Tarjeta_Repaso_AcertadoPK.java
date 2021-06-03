@@ -52,18 +52,18 @@ public class Tarjeta_Repaso_AcertadoPK implements Serializable {
 			return false;
 		return true;
 	}
-	public int getTarjeta_IdTarjeta() {
+	public int getTarjeta_idTarjeta() {
 		return Tarjeta_idTarjeta;
 	}
-	public void setTarjeta_IdTarjeta(int idTarjeta) {
+	public void setTarjeta_idTarjeta(int idTarjeta) {
 		this.Tarjeta_idTarjeta = idTarjeta;
 	}
 	
 	public int getRepaso_idRepaso() {
 		return Repaso_idRepaso;
 	}
-	public void setRepaso_idRepaso(int repaso_idRepaso) {
-		Repaso_idRepaso = repaso_idRepaso;
+	public void setRepaso_idRepaso(int Repaso_idRepaso) {
+		this.Repaso_idRepaso = Repaso_idRepaso;
 	}
 	@Override
 	public String toString() {

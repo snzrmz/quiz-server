@@ -34,10 +34,8 @@ public class RepasoRest {
 	@Inject
 	private RepasoDaoImp repasoDAO;
 	@Inject
-	private TarjetaRepasoAcertadoDaoImp tarjetaRepasoAcertadoDAO;
-	@Inject
-	private TarjetaRepasoFalladoDaoImp tarjetaRepasoFalladoDAO;
-
+	private TarjetaDaoImp tarjetaDAO;
+	
 
 	@GET
 	@Produces(APPLICATION_JSON)
@@ -60,27 +58,26 @@ public class RepasoRest {
 	@Consumes(APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public Response postRepaso(@Context UriInfo uriInfo, Repaso repaso) {
+		Tarjeta tarjeta = null;
+		for (int i = 0; i < repaso.getTarjetaRepasoAcertado().size(); i++) {
+			tarjeta = tarjetaDAO.getOne(repaso.getTarjetaRepasoAcertado().get(i).getTarjetaIdTarjeta());
+			repaso.getTarjetaRepasoAcertado().get(i).setTarjeta(tarjeta);
+		}
+		for (int i = 0; i < repaso.getTarjetaRepasoFallado().size(); i++) {
+			tarjeta = tarjetaDAO.getOne(repaso.getTarjetaRepasoFallado().get(i).getTarjetaIdTarjeta());
+			repaso.getTarjetaRepasoFallado().get(i).setTarjeta(tarjeta);
+		}
 
 		int idRepaso = repasoDAO.create(repaso);
-	//	if (idRepaso != -1) {
-		//	UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
-		//	URI uri = uriBuilder.path(Integer.toString(idRepaso)).build();
-		//	return Response.created(uri).build();
-	//	} else {
-			
-	return Response.ok(repaso).build();
+		if (idRepaso != -1) {
+			UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
+			URI uri = uriBuilder.path(Integer.toString(idRepaso)).build();
+			return Response.created(uri).build();
+		}
+
+		return Response.ok(repaso).build();
 
 	}
-	
-	@Path("/acertadas")
-	@POST
-	@Consumes(APPLICATION_JSON)
-	public Response postAcertadas(List<Tarjeta_Repaso_Acertado> tras) {
-		System.out.println(tras);
-		tarjetaRepasoAcertadoDAO.createListOf(tras);
-		return Response.status(Response.Status.OK).build();
-	}
-
 
 
 }

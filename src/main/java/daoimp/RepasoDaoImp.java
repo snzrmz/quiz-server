@@ -12,6 +12,7 @@ import dao.TarjetaDao;
 import entities.Repaso;
 import entities.Tarjeta;
 import entities.Tarjeta_Repaso_Acertado;
+import entities.Tarjeta_Repaso_Fallado;
 
 @RequestScoped
 public class RepasoDaoImp implements RepasoDao {
@@ -30,18 +31,15 @@ public class RepasoDaoImp implements RepasoDao {
 	public int create(Repaso repaso) {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		List <Tarjeta_Repaso_Acertado> tras = new ArrayList<>();
+	
 		for(Tarjeta_Repaso_Acertado tra : repaso.getTarjetaRepasoAcertado()) {
-			
 			tra.setRepaso(repaso);
-			
-			//Tarjeta tarjeta ; necesito obtener tarjeta
-			
-			//tra.setTarjeta(tarjeta);
-			
-			tras.add(tra);
 		}
-		repaso.setTarjetaRepasoAcertado(tras);
+		
+		for(Tarjeta_Repaso_Fallado trf : repaso.getTarjetaRepasoFallado()) {
+			trf.setRepaso(repaso);
+		}
+		
 		em.merge(repaso);
 		et.commit();
 		return repaso.getIdRepaso();

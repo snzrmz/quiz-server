@@ -9,21 +9,21 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Tarjeta_Repaso_FalladoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Column(name = "Tarjeta_idTarjeta")
-	protected int Tarjeta_idTarjeta;
+	private int Tarjeta_idTarjeta;
+	
 	@Column(name = "Repaso_idRepaso")
-	protected int Repaso_idRepaso;
-
-	public Tarjeta_Repaso_FalladoPK() {
-	}
+	private int Repaso_idRepaso;
 	
 
-	public Tarjeta_Repaso_FalladoPK(int idTarjeta, int idRepaso) {
+	public Tarjeta_Repaso_FalladoPK (int idTarjeta, int idRepaso) {
 		this.Tarjeta_idTarjeta = idTarjeta;
 		this.Repaso_idRepaso = idRepaso;
 	}
-
-
+	public Tarjeta_Repaso_FalladoPK() {
+		
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -49,25 +49,21 @@ public class Tarjeta_Repaso_FalladoPK implements Serializable {
 		return true;
 	}
 
-
-	public int getidTarjeta() {
+	public int getTarjeta_idTarjeta() {
 		return Tarjeta_idTarjeta;
 	}
-
-
-	public void setidTarjeta(int tarjeta_idTarjeta) {
-		this.Tarjeta_idTarjeta= tarjeta_idTarjeta;
+	public void setTarjeta_idTarjeta(int idTarjeta) {
+		this.Tarjeta_idTarjeta = idTarjeta;
 	}
-
-
-	public int getidRepaso() {
+	
+	public int getRepaso_idRepaso() {
 		return Repaso_idRepaso;
 	}
-
-
-	public void setidRepaso(int repaso_idRepaso) {
-		Repaso_idRepaso = repaso_idRepaso;
+	public void setRepaso_idRepaso(int Repaso_idRepaso) {
+		this.Repaso_idRepaso = Repaso_idRepaso;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "{\"Tarjeta_idTarjeta\":\"" + Tarjeta_idTarjeta + "\", \"Repaso_idRepaso\":\"" + Repaso_idRepaso + "\"}";
+	}
 }

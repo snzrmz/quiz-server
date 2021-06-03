@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import entities.Repaso;
+import entities.Tarjeta;
 import entities.Tarjeta_Repaso_Acertado;
 @Local
 public interface RepasoDao {
