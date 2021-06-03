@@ -56,7 +56,10 @@ public class TarjetaRest {
 	@POST
 	@Consumes(APPLICATION_JSON)
 	public Response postTarjeta(Tarjeta tarjeta) {
-		return Response.ok(tarjetaDAO.create(tarjeta)).build();
+		
+		int idTarjeta = tarjetaDAO.create(tarjeta);
+		
+		return Response.ok().build();
 
 	}
 

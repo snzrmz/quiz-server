@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import dao.TarjetaDao;
 import entities.Tarjeta;
+import entities.Tarjeta_Respuesta_Unica;
 
 @RequestScoped
 public class TarjetaDaoImp implements TarjetaDao {
@@ -37,12 +38,16 @@ public class TarjetaDaoImp implements TarjetaDao {
 	}
 
 	@Override
-	public Tarjeta create(Tarjeta tarjeta) {
+	public int create(Tarjeta tarjeta) {
 		EntityTransaction et = em.getTransaction();
+		Tarjeta_Respuesta_Unica tru = new Tarjeta_Respuesta_Unica();
+		tru.setValor(tarjeta.getRespuesta().getValor());
 		et.begin();
 		em.persist(tarjeta);
+		tru.setIdTarjeta(tarjeta.getIdTarjeta());
+		em.persist(tru);
 		et.commit();
-		return tarjeta;
+		return tarjeta.getIdTarjeta();
 	}
 
 	@Override

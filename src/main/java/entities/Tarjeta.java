@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 
 import org.hibernate.annotations.Formula;
@@ -30,7 +31,9 @@ import org.hibernate.annotations.Formula;
 				+ "WHERE t.idJugador = :idJugador AND t.nombreMazo = :nombreMazo") })
 public class Tarjeta implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idTarjeta")
 	private int idTarjeta;
 	private String tipoRespuesta;
 	private int idJugador;
@@ -41,16 +44,13 @@ public class Tarjeta implements Serializable {
 			@JoinColumn(name = "nombreMazo", referencedColumnName = "nombre", insertable = false, updatable = false) })
 	private Mazo mazo;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumns({
 			@JoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false) })
 	private List<Respuesta> respuestas;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumns({
-			@JoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false) })
+	@OneToOne(cascade=CascadeType.PERSIST, mappedBy = "tarjeta")
 	private Tarjeta_Respuesta_Unica respuesta;
-	
 	@OneToMany(mappedBy ="tarjeta")
 	private List<Tarjeta_Repaso_Acertado> acertado;
 	
@@ -141,8 +141,13 @@ public class Tarjeta implements Serializable {
 	@Override
 	public String toString() {
 		return "{\"idTarjeta\":\"" + idTarjeta + "\", \"tipoRespuesta\":\"" + tipoRespuesta + "\", \"idJugador\":\""
-				+ idJugador + "\", \"nombreMazo\":\"" + nombreMazo + "\", \"mazo\":\"" + mazo + "\"}";
+				+ idJugador + "\", \"nombreMazo\":\"" + nombreMazo + "\", \"mazo\":\"" + mazo + "\", \"respuestas\":\""
+				+ respuestas + "\", \"respuesta\":\"" + respuesta + "\", \"acertado\":\"" + acertado
+				+ "\", \"fallado\":\"" + fallado + "\", \"pregunta\":\"" + pregunta + "\", \"recursoRuta\":\""
+				+ recursoRuta + "\"}";
 	}
+
+	
 
 
 }
