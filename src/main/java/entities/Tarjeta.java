@@ -49,8 +49,7 @@ public class Tarjeta implements Serializable {
 			@JoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta", insertable = false, updatable = false) })
 	private List<Respuesta> respuestas;
 
-	@OneToOne(cascade=CascadeType.PERSIST, mappedBy = "tarjeta")
-	private Tarjeta_Respuesta_Unica respuesta;
+	
 	@OneToMany(mappedBy ="tarjeta")
 	private List<Tarjeta_Repaso_Acertado> acertado;
 	
@@ -114,13 +113,7 @@ public class Tarjeta implements Serializable {
 		this.recursoRuta = recurso;
 	}
 
-	public Tarjeta_Respuesta_Unica getRespuesta() {
-		return respuesta;
-	}
 
-	public void setRespuesta(Tarjeta_Respuesta_Unica respuesta) {
-		this.respuesta = respuesta;
-	}
 
 	public List<Respuesta> getRespuestas() {
 		if (this.getTipoRespuesta().equals("MULTIPLE")) {
@@ -142,7 +135,7 @@ public class Tarjeta implements Serializable {
 	public String toString() {
 		return "{\"idTarjeta\":\"" + idTarjeta + "\", \"tipoRespuesta\":\"" + tipoRespuesta + "\", \"idJugador\":\""
 				+ idJugador + "\", \"nombreMazo\":\"" + nombreMazo + "\", \"mazo\":\"" + mazo + "\", \"respuestas\":\""
-				+ respuestas + "\", \"respuesta\":\"" + respuesta + "\", \"acertado\":\"" + acertado
+				+ respuestas + "\", \"respuesta\":\""  + "\", \"acertado\":\"" + acertado
 				+ "\", \"fallado\":\"" + fallado + "\", \"pregunta\":\"" + pregunta + "\", \"recursoRuta\":\""
 				+ recursoRuta + "\"}";
 	}

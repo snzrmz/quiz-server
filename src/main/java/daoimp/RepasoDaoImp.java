@@ -1,5 +1,4 @@
 package daoimp;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -8,9 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import dao.RepasoDao;
-import dao.TarjetaDao;
 import entities.Repaso;
-import entities.Tarjeta;
 import entities.Tarjeta_Repaso_Acertado;
 import entities.Tarjeta_Repaso_Fallado;
 

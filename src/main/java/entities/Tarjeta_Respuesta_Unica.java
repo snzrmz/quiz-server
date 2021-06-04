@@ -22,8 +22,6 @@ public class Tarjeta_Respuesta_Unica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "idTarjeta", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTarjeta;
 
 	public int getIdTarjeta() {
@@ -36,6 +34,7 @@ public class Tarjeta_Respuesta_Unica implements Serializable {
 
 	private String valor;
 
+	
 	@OneToOne
 	@PrimaryKeyJoinColumn(name = "idTarjeta", referencedColumnName = "idTarjeta")
 	private Tarjeta tarjeta;

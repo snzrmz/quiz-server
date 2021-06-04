@@ -34,10 +34,10 @@ public class Respuesta implements Serializable {
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
-	public int correcta() {
+	public int getCorrecta() {
 		return correcta;
 	}
-	public void correcta(int correcta) {
+	public void setCorrecta(int correcta) {
 		this.correcta = correcta;
 	}
 	/*public Tarjeta_Respuesta_Multiple getTarjetaRespuestaMultiple() {
@@ -52,6 +52,11 @@ public class Respuesta implements Serializable {
 	}
 	public void setIdTarjeta(int idTarjeta) {
 		this.idTarjeta = idTarjeta;
+	}
+	@Override
+	public String toString() {
+		return "{\"idRespuesta\":\"" + idRespuesta + "\", \"valor\":\"" + valor + "\", \"correcta\":\"" + correcta
+				+ "\", \"idTarjeta\":\"" + idTarjeta + "\"}";
 	}
 
 }

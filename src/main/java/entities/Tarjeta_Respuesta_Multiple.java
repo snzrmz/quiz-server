@@ -14,22 +14,16 @@ public class Tarjeta_Respuesta_Multiple implements Serializable {
 
 	
 
-	/*public int getIdTarjeta() {
+	public int getIdTarjeta() {
 		return idTarjeta;
-	}*/
+	}
 
-	/*public void setIdTarjeta(int idTarjeta) {
+	public void setIdTarjeta(int idTarjeta) {
 		this.idTarjeta = idTarjeta;
-	}*/
+	}
 
 
-	/*public Tarjeta getTarjeta() {
-		return tarjeta;
-	}*/
-
-	/*public void setTarjeta(Tarjeta tarjeta) {
-		this.tarjeta = tarjeta;
-	}*/
+	
 	
 	
 	

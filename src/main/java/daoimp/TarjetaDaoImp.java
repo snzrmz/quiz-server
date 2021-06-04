@@ -40,12 +40,9 @@ public class TarjetaDaoImp implements TarjetaDao {
 	@Override
 	public int create(Tarjeta tarjeta) {
 		EntityTransaction et = em.getTransaction();
-		Tarjeta_Respuesta_Unica tru = new Tarjeta_Respuesta_Unica();
-		tru.setValor(tarjeta.getRespuesta().getValor());
 		et.begin();
+		//tarjeta.getRespuesta().setTarjeta(tarjeta);
 		em.persist(tarjeta);
-		tru.setIdTarjeta(tarjeta.getIdTarjeta());
-		em.persist(tru);
 		et.commit();
 		return tarjeta.getIdTarjeta();
 	}
