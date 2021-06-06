@@ -34,13 +34,13 @@ import entities.Jugador;
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
-
+	
 	@GET
 	@Path("/perfil/{nombreFichero}")
 	@Produces("image/*")
 	public Response getFichero(@PathParam("nombreFichero") String nombreFichero) {
 		File fichero = new File(
-				"C:\\Users\\Luis\\payara5\\glassfish\\domains\\domain1\\config\\images\\" + nombreFichero);
+				System.getProperty("user.dir") + File.separator + nombreFichero);
 		return Response.ok(fichero).header("Content-Length", fichero.length()).build();
 	}
 
@@ -50,7 +50,7 @@ public class JugadorRest {
 	public Response putFichero(File fichero, @PathParam("nombreFichero") String nombreFichero) {
 		Response.Status responseStatus = Response.Status.OK;
 		fichero.renameTo(
-				new File("C:\\Users\\Luis\\payara5\\glassfish\\domains\\domain1\\config\\images\\" + nombreFichero));
+				new File(System.getProperty("user.dir") + File.separator + nombreFichero));
 		return Response.status(responseStatus).build();
 	}
 
