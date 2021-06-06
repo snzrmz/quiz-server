@@ -2,7 +2,12 @@ package services;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,6 +23,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
 import daoimp.JugadorDaoImp;
 import entities.Jugador;
 
@@ -26,22 +34,56 @@ import entities.Jugador;
 public class JugadorRest {
 	@Inject
 	private JugadorDaoImp jugadorDAO;
-	
+
 	@GET
 	@Path("/perfil/{nombreFichero}")
-	@Produces("images/jpeg")
+	@Produces("image/*")
 	public Response getFichero(@PathParam("nombreFichero") String nombreFichero) {
-		File fichero = new File("/home/miguelangel/Imágenes/" + nombreFichero);
+		File fichero = new File(
+				"C:\\Users\\Luis\\payara5\\glassfish\\domains\\domain1\\config\\images\\" + nombreFichero);
 		return Response.ok(fichero).header("Content-Length", fichero.length()).build();
 	}
 
 	@PUT
 	@Path("/perfil/{nombreFichero}")
-	@Consumes("images/jpeg")
+	@Consumes("image/*")
 	public Response putFichero(File fichero, @PathParam("nombreFichero") String nombreFichero) {
 		Response.Status responseStatus = Response.Status.OK;
-		fichero.renameTo(new File("/home/miguelangel/Imágenes/" + nombreFichero));
+		fichero.renameTo(
+				new File("C:\\Users\\Luis\\payara5\\glassfish\\domains\\domain1\\config\\images\\" + nombreFichero));
 		return Response.status(responseStatus).build();
+	}
+
+	@POST
+	@Path("/perfil/")
+	@Consumes("multipart/form-data")
+	public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream,
+			@FormDataParam("file") FormDataContentDisposition fileDetail) {
+
+		String uploadedFileLocation = 
+				System.getProperty("user.dir")  
+				+ File.separator 
+				+ "images" 
+				+ File.separator
+				+ fileDetail.getFileName();
+
+		writeToFile(uploadedInputStream, uploadedFileLocation);
+		System.out.println("File uploaded to : " + uploadedFileLocation);
+		return Response.status(200).entity(fileDetail.getFileName()).build();
+	}
+
+	private void writeToFile(InputStream uploadedInputStream, String uploadedFileLocation) {
+		try (OutputStream out = new FileOutputStream(new File(uploadedFileLocation))) {
+			int read = 0;
+			
+			byte[] bytes = new byte[1024];
+
+			while ((read = uploadedInputStream.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+
+		} catch (IOException e) {
+		}
 	}
 
 	@Path("/{id}")
@@ -76,16 +118,15 @@ public class JugadorRest {
 
 		int idJugador = jugadorDAO.create(jugador);
 
-		if (idJugador!=-1) {
+		if (idJugador != -1) {
 			UriBuilder uriBuilder = uriInfo.getRequestUriBuilder();
 			URI uri = uriBuilder.path(Integer.toString(idJugador)).build();
 			return Response.created(uri).build();
-		}
-		else {
+		} else {
 			Response.Status responseStatus = Response.Status.NOT_FOUND;
 			return Response.status(responseStatus).build();
 		}
-		
+
 	}
 
 }

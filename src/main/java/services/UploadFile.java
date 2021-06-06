@@ -44,7 +44,6 @@ public class UploadFile {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 }

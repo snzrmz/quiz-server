@@ -3,7 +3,7 @@
 <body>
 <h1>File Upload example with Jersey</h1>
  
-<form action="api/file/upload" 
+<form action="api/jugadores/perfil/" 
 	method="post" enctype="multipart/form-data">
 	Select a file: <input type="file" name="file" size="50" />
     <br/><br/>
