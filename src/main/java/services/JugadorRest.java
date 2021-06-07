@@ -37,10 +37,10 @@ public class JugadorRest {
 	
 	@GET
 	@Path("/perfil/{nombreFichero}")
-	@Produces("image/*")
+	@Produces({"image/png", "image/jpeg"})
 	public Response getFichero(@PathParam("nombreFichero") String nombreFichero) {
 		File fichero = new File(
-				System.getProperty("user.dir") + File.separator + nombreFichero);
+				System.getProperty("user.dir") + File.separator + "images" + File.separator + nombreFichero);
 		return Response.ok(fichero).header("Content-Length", fichero.length()).build();
 	}
 
